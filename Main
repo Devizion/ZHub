@@ -1,0 +1,864 @@
+--Serives
+local Players=game:GetService("Players")
+local UserInputService=game:GetService("UserInputService")
+local TweenService=game:GetService("TweenService")
+local RunService=game:GetService("RunService")
+--Const
+local Exploiter=Players.LocalPlayer
+local Camera=workspace.CurrentCamera
+--Create Gui
+
+local Main=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Main")
+local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
+
+if not Main then
+	local Cursor = Instance.new("ScreenGui")
+	Main2 = Instance.new("Frame")
+	local CursorM = Instance.new("Frame")
+
+	Cursor.Name = "Cursor"
+	Cursor.DisplayOrder=101
+	Cursor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Main2.Name = "Main2"
+	Main2.Visible=false
+	Main2.Parent = Cursor
+	Main2.AnchorPoint = Vector2.new(0, 0)
+	Main2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Main2.BackgroundTransparency = 1.000
+	Main2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Main2.BorderSizePixel = 0
+	Main2.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main2.Size = UDim2.new(0, 20, 0, 20)
+
+	CursorM.Name = "CursorM"
+	CursorM.Parent = Main2
+	CursorM.AnchorPoint = Vector2.new(0.5, 0.5)
+	CursorM.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+	CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	CursorM.BorderSizePixel = 0
+	CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
+
+	Main = Instance.new("ScreenGui")
+	MainFrame = Instance.new("Frame")
+	local UIGradient = Instance.new("UIGradient")
+	local UICorner = Instance.new("UICorner")
+	local A = Instance.new("Folder")
+	local Name = Instance.new("TextLabel")
+	local UIGradient_2 = Instance.new("UIGradient")
+	local Name2 = Instance.new("TextLabel")
+	local UIGradient_3 = Instance.new("UIGradient")
+	local ver = Instance.new("TextLabel")
+	local Stroke = Instance.new("Frame")
+	local Stroke_2 = Instance.new("Frame")
+	local Scroll = Instance.new("Folder")
+	local MainScroll = Instance.new("Frame")
+	local ScrollingFrame = Instance.new("ScrollingFrame")
+	AdvencedMenu = Instance.new("TextButton")
+	local UICorner_2 = Instance.new("UICorner")
+	local UIGradient_4 = Instance.new("UIGradient")
+	BasicMenu = Instance.new("TextButton")
+	local UICorner_3 = Instance.new("UICorner")
+	local UIGradient_5 = Instance.new("UIGradient")
+	local Menus = Instance.new("Folder")
+	local BasicMenu_2 = Instance.new("Folder")
+	local TpPlayer = Instance.new("Frame")
+	local UICorner_4 = Instance.new("UICorner")
+	local UIGradient_6 = Instance.new("UIGradient")
+	Done2 = Instance.new("TextButton")
+	local Name_2 = Instance.new("TextLabel")
+	Player = Instance.new("TextBox")
+	local Speed = Instance.new("Frame")
+	local UIGradient_7 = Instance.new("UIGradient")
+	local UICorner_5 = Instance.new("UICorner")
+	Done3 = Instance.new("TextButton")
+	local Name_3 = Instance.new("TextLabel")
+	Number = Instance.new("TextBox")
+	local Tp = Instance.new("Frame")
+	local Name_4 = Instance.new("TextLabel")
+	local UICorner_6 = Instance.new("UICorner")
+	local UIGradient_8 = Instance.new("UIGradient")
+	Done1 = Instance.new("TextButton")
+	X = Instance.new("TextBox")
+	Y = Instance.new("TextBox")
+	Z = Instance.new("TextBox")
+	local Icon = Instance.new("TextLabel")
+	local Icon_2 = Instance.new("TextLabel")
+	local Icon_3 = Instance.new("TextLabel")
+	local AdvencedMenu_2 = Instance.new("Folder")
+	local Aimbot = Instance.new("Frame")
+	local Name_5 = Instance.new("TextLabel")
+	local UICorner_7 = Instance.new("UICorner")
+	local UIGradient_9 = Instance.new("UIGradient")
+	local Bind = Instance.new("TextBox")
+	local IconB = Instance.new("TextLabel")
+	Done4 = Instance.new("TextButton")
+	local Wallhack = Instance.new("Frame")
+	local UICorner_8 = Instance.new("UICorner")
+	local UIGradient_10 = Instance.new("UIGradient")
+	Done5 = Instance.new("TextButton")
+	local Name_6 = Instance.new("TextLabel")
+
+	--Properties:
+
+	Main.Name = "Main"
+	Main.DisplayOrder=100
+	Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	Main.ResetOnSpawn = false
+
+	MainFrame.Name = "MainFrame"
+	MainFrame.Parent = Main
+	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	MainFrame.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+	MainFrame.BackgroundTransparency = 0.200
+	MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	MainFrame.BorderSizePixel = 0
+	MainFrame.Position = UDim2.new(0.5, 0, -1, 0)
+	MainFrame.Size = UDim2.new(0.5, 0, 0.400000006, 0)
+
+	UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 146, 83)), ColorSequenceKeypoint.new(0.42, Color3.fromRGB(255, 146, 83)), ColorSequenceKeypoint.new(0.92, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient.Offset = Vector2.new(-0.400000006, 0)
+	UIGradient.Rotation = 59
+	UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.55, 0.00), NumberSequenceKeypoint.new(1.00, 0.00)}
+	UIGradient.Parent = MainFrame
+
+	UICorner.Parent = MainFrame
+
+	A.Name = "A"
+	A.Parent = MainFrame
+
+	Name.Name = "Name"
+	Name.Parent = A
+	Name.AnchorPoint = Vector2.new(0.5, 0.5)
+	Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name.BackgroundTransparency = 1.000
+	Name.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name.BorderSizePixel = 0
+	Name.Position = UDim2.new(0.170926571, 0, 0.0525558069, 0)
+	Name.Size = UDim2.new(0.200000003, 0, 0.0850000009, 0)
+	Name.Font = Enum.Font.Arial
+	Name.Text = "Hub"
+	Name.TextColor3 = Color3.fromRGB(186, 186, 186)
+	Name.TextSize = 24.000
+	Name.TextXAlignment = Enum.TextXAlignment.Left
+
+	UIGradient_2.Parent = Name
+
+	Name2.Name = "Name2"
+	Name2.Parent = A
+	Name2.AnchorPoint = Vector2.new(0.5, 0.5)
+	Name2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name2.BackgroundTransparency = 1.000
+	Name2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name2.BorderSizePixel = 0
+	Name2.Position = UDim2.new(0.124121375, 0, 0.054962758, 0)
+	Name2.Size = UDim2.new(0.200000003, 0, 0.0850000009, 0)
+	Name2.Font = Enum.Font.Arial
+	Name2.Text = "Z"
+	Name2.TextColor3 = Color3.fromRGB(186, 130, 41)
+	Name2.TextSize = 45.000
+	Name2.TextXAlignment = Enum.TextXAlignment.Left
+
+	UIGradient_3.Rotation = -19
+	UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.17, 0.61), NumberSequenceKeypoint.new(1.00, 0.00)}
+	UIGradient_3.Parent = Name2
+
+	ver.Name = "ver"
+	ver.Parent = A
+	ver.AnchorPoint = Vector2.new(1, 1)
+	ver.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ver.BackgroundTransparency = 1.000
+	ver.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ver.BorderSizePixel = 0
+	ver.Position = UDim2.new(0.980000019, 0, 1, 0)
+	ver.Size = UDim2.new(0.200000003, 0, 0.100000001, 0)
+	ver.Font = Enum.Font.Arial
+	ver.Text = "v0.5"
+	ver.TextColor3 = Color3.fromRGB(186, 186, 186)
+	ver.TextSize = 14.000
+	ver.TextTransparency = 0.500
+	ver.TextXAlignment = Enum.TextXAlignment.Right
+	ver.TextYAlignment = Enum.TextYAlignment.Bottom
+
+	Stroke.Name = "Stroke"
+	Stroke.Parent = A
+	Stroke.AnchorPoint = Vector2.new(0.5, 0.5)
+	Stroke.BackgroundColor3 = Color3.fromRGB(129, 129, 129)
+	Stroke.BackgroundTransparency = 0.700
+	Stroke.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Stroke.BorderSizePixel = 0
+	Stroke.Position = UDim2.new(0.5, 0, 0.100000001, 0)
+	Stroke.Size = UDim2.new(0.949999988, 0, 0.00499999989, 0)
+
+	Stroke_2.Name = "Stroke"
+	Stroke_2.Parent = A
+	Stroke_2.AnchorPoint = Vector2.new(0.5, 0.5)
+	Stroke_2.BackgroundColor3 = Color3.fromRGB(129, 129, 129)
+	Stroke_2.BackgroundTransparency = 0.700
+	Stroke_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Stroke_2.BorderSizePixel = 0
+	Stroke_2.Position = UDim2.new(0.224999994, 0, 0.550000012, 0)
+	Stroke_2.Rotation = 90.000
+	Stroke_2.Size = UDim2.new(0.375, 0, 0.00499999989, 0)
+
+	Scroll.Name = "Scroll"
+	Scroll.Parent = MainFrame
+
+	MainScroll.Name = "MainScroll"
+	MainScroll.Parent = Scroll
+	MainScroll.AnchorPoint = Vector2.new(0.5, 1)
+	MainScroll.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+	MainScroll.BackgroundTransparency = 0.600
+	MainScroll.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	MainScroll.BorderSizePixel = 0
+	MainScroll.Position = UDim2.new(0.115000002, 0, 0.949999988, 0)
+	MainScroll.Size = UDim2.new(0.200000003, 0, 0.800000012, 0)
+
+	ScrollingFrame.Parent = MainScroll
+	ScrollingFrame.Active = true
+	ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ScrollingFrame.BackgroundTransparency = 1.000
+	ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ScrollingFrame.BorderSizePixel = 0
+	ScrollingFrame.Size = UDim2.new(1, 0, 1, 0)
+	ScrollingFrame.ScrollBarThickness = 6
+	ScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+
+	AdvencedMenu.Name = "AdvencedMenu"
+	AdvencedMenu.Parent = ScrollingFrame
+	AdvencedMenu.AnchorPoint = Vector2.new(0.5, 0)
+	AdvencedMenu.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	AdvencedMenu.BackgroundTransparency = 0.200
+	AdvencedMenu.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	AdvencedMenu.BorderSizePixel = 0
+	AdvencedMenu.Position = UDim2.new(0.5, 0, 0.125, 0)
+	AdvencedMenu.Size = UDim2.new(1, 0, 0.075000003, 0)
+	AdvencedMenu.Font = Enum.Font.Arial
+	AdvencedMenu.Text = "Продвинутые функции"
+	AdvencedMenu.TextColor3 = Color3.fromRGB(255, 255, 255)
+	AdvencedMenu.TextSize = 18.000
+
+	UICorner_2.Parent = AdvencedMenu
+
+	UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_4.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_4.Rotation = 2
+	UIGradient_4.Parent = AdvencedMenu
+
+	BasicMenu.Name = "BasicMenu"
+	BasicMenu.Parent = ScrollingFrame
+	BasicMenu.AnchorPoint = Vector2.new(0.5, 0)
+	BasicMenu.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	BasicMenu.BackgroundTransparency = 0.200
+	BasicMenu.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	BasicMenu.BorderSizePixel = 0
+	BasicMenu.Position = UDim2.new(0.5, 0, 0.0250000004, 0)
+	BasicMenu.Size = UDim2.new(1, 0, 0.075000003, 0)
+	BasicMenu.Font = Enum.Font.Arial
+	BasicMenu.Text = "Обычные функции"
+	BasicMenu.TextColor3 = Color3.fromRGB(255, 255, 255)
+	BasicMenu.TextSize = 18.000
+
+	UICorner_3.Parent = BasicMenu
+
+	UIGradient_5.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_5.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_5.Rotation = 2
+	UIGradient_5.Parent = BasicMenu
+
+	Menus.Name = "Menus"
+	Menus.Parent = MainFrame
+
+	BasicMenu_2.Name = "BasicMenu"
+	BasicMenu_2.Parent = Menus
+
+	TpPlayer.Name = "TpPlayer"
+	TpPlayer.Parent = BasicMenu_2
+	TpPlayer.AnchorPoint = Vector2.new(1, 0.5)
+	TpPlayer.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	TpPlayer.BackgroundTransparency = 0.200
+	TpPlayer.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TpPlayer.BorderSizePixel = 0
+	TpPlayer.Position = UDim2.new(0.949999988, 0, 0.529999971, 0)
+	TpPlayer.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+
+	UICorner_4.Parent = TpPlayer
+
+	UIGradient_6.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_6.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_6.Rotation = 2
+	UIGradient_6.Parent = TpPlayer
+
+	Done2.Name = "Done2"
+	Done2.Parent = TpPlayer
+	Done2.AnchorPoint = Vector2.new(1, 0.5)
+	Done2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done2.BackgroundTransparency = 1.000
+	Done2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done2.BorderSizePixel = 0
+	Done2.Position = UDim2.new(1, 0, 0.5, 0)
+	Done2.Size = UDim2.new(0.100000001, 0, 0.800000012, 0)
+	Done2.Font = Enum.Font.Arial
+	Done2.Text = "Готово"
+	Done2.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done2.TextSize = 14.000
+
+	Name_2.Name = "Name"
+	Name_2.Parent = TpPlayer
+	Name_2.AnchorPoint = Vector2.new(0, 0.5)
+	Name_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_2.BackgroundTransparency = 1.000
+	Name_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name_2.BorderSizePixel = 0
+	Name_2.Position = UDim2.new(0.00999998488, 0, 0.50000006, 0)
+	Name_2.Size = UDim2.new(0.150000006, 0, 0.800000012, 0)
+	Name_2.Font = Enum.Font.Arial
+	Name_2.Text = "Тп к игроку"
+	Name_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name_2.TextSize = 14.000
+	Name_2.TextXAlignment = Enum.TextXAlignment.Left
+
+	Player.Name = "Player"
+	Player.Parent = TpPlayer
+	Player.AnchorPoint = Vector2.new(0.5, 0.5)
+	Player.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Player.BackgroundTransparency = 1.000
+	Player.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Player.BorderSizePixel = 0
+	Player.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Player.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Player.Font = Enum.Font.Arial
+	Player.Text = "Имя игрока"
+	Player.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Player.TextSize = 16.000
+
+	Speed.Name = "Speed"
+	Speed.Parent = BasicMenu_2
+	Speed.AnchorPoint = Vector2.new(1, 0.5)
+	Speed.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	Speed.BackgroundTransparency = 0.200
+	Speed.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Speed.BorderSizePixel = 0
+	Speed.Position = UDim2.new(0.949999988, 0, 0.800000012, 0)
+	Speed.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+
+	UIGradient_7.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_7.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_7.Rotation = 2
+	UIGradient_7.Parent = Speed
+
+	UICorner_5.Parent = Speed
+
+	Done3.Name = "Done3"
+	Done3.Parent = Speed
+	Done3.AnchorPoint = Vector2.new(1, 0.5)
+	Done3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done3.BackgroundTransparency = 1.000
+	Done3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done3.BorderSizePixel = 0
+	Done3.Position = UDim2.new(1, 0, 0.5, 0)
+	Done3.Size = UDim2.new(0.100000001, 0, 0.800000012, 0)
+	Done3.Font = Enum.Font.Arial
+	Done3.Text = "Готово"
+	Done3.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done3.TextSize = 14.000
+
+	Name_3.Name = "Name"
+	Name_3.Parent = Speed
+	Name_3.AnchorPoint = Vector2.new(0, 0.5)
+	Name_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_3.BackgroundTransparency = 1.000
+	Name_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name_3.BorderSizePixel = 0
+	Name_3.Position = UDim2.new(0.00999998488, 0, 0.50000006, 0)
+	Name_3.Size = UDim2.new(0.150000006, 0, 0.800000012, 0)
+	Name_3.Font = Enum.Font.Arial
+	Name_3.Text = "Скорость"
+	Name_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name_3.TextSize = 14.000
+	Name_3.TextXAlignment = Enum.TextXAlignment.Left
+
+	Number.Name = "Number"
+	Number.Parent = Speed
+	Number.AnchorPoint = Vector2.new(0.5, 0.5)
+	Number.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Number.BackgroundTransparency = 1.000
+	Number.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Number.BorderSizePixel = 0
+	Number.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Number.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Number.Font = Enum.Font.Arial
+	Number.Text = "Число"
+	Number.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Number.TextSize = 16.000
+
+	Tp.Name = "Tp"
+	Tp.Parent = BasicMenu_2
+	Tp.AnchorPoint = Vector2.new(1, 0.5)
+	Tp.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	Tp.BackgroundTransparency = 0.200
+	Tp.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Tp.BorderSizePixel = 0
+	Tp.Position = UDim2.new(0.949999988, 0, 0.25999999, 0)
+	Tp.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+
+	Name_4.Name = "Name"
+	Name_4.Parent = Tp
+	Name_4.AnchorPoint = Vector2.new(0, 0.5)
+	Name_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_4.BackgroundTransparency = 1.000
+	Name_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name_4.BorderSizePixel = 0
+	Name_4.Position = UDim2.new(0.00999998488, 0, 0.50000006, 0)
+	Name_4.Size = UDim2.new(0.150000006, 0, 0.800000012, 0)
+	Name_4.Font = Enum.Font.Arial
+	Name_4.Text = "Телепорт"
+	Name_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name_4.TextSize = 14.000
+	Name_4.TextXAlignment = Enum.TextXAlignment.Left
+
+	UICorner_6.Parent = Tp
+
+	UIGradient_8.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_8.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_8.Rotation = 2
+	UIGradient_8.Parent = Tp
+
+	Done1.Name = "Done1"
+	Done1.Parent = Tp
+	Done1.AnchorPoint = Vector2.new(1, 0.5)
+	Done1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done1.BackgroundTransparency = 1.000
+	Done1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done1.BorderSizePixel = 0
+	Done1.Position = UDim2.new(1, 0, 0.5, 0)
+	Done1.Size = UDim2.new(0.100000001, 0, 0.800000012, 0)
+	Done1.Font = Enum.Font.Arial
+	Done1.Text = "Готово"
+	Done1.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done1.TextSize = 14.000
+
+	X.Name = "X"
+	X.Parent = Tp
+	X.AnchorPoint = Vector2.new(0.5, 1)
+	X.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	X.BackgroundTransparency = 1.000
+	X.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	X.BorderSizePixel = 0
+	X.Position = UDim2.new(0.274777204, 0, 0.837965071, 0)
+	X.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	X.Font = Enum.Font.Arial
+	X.Text = "0"
+	X.TextColor3 = Color3.fromRGB(255, 255, 255)
+	X.TextSize = 16.000
+
+	Y.Name = "Y"
+	Y.Parent = Tp
+	Y.AnchorPoint = Vector2.new(0.5, 1)
+	Y.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Y.BackgroundTransparency = 1.000
+	Y.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Y.BorderSizePixel = 0
+	Y.Position = UDim2.new(0.499777138, 0, 0.837965071, 0)
+	Y.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Y.Font = Enum.Font.Arial
+	Y.Text = "0"
+	Y.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Y.TextSize = 16.000
+
+	Z.Name = "Z"
+	Z.Parent = Tp
+	Z.AnchorPoint = Vector2.new(0.5, 1)
+	Z.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Z.BackgroundTransparency = 1.000
+	Z.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Z.BorderSizePixel = 0
+	Z.Position = UDim2.new(0.723419309, 0, 0.837965071, 0)
+	Z.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Z.Font = Enum.Font.Arial
+	Z.Text = "0"
+	Z.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Z.TextSize = 16.000
+
+	Icon.Name = "Icon"
+	Icon.Parent = Tp
+	Icon.AnchorPoint = Vector2.new(0.5, 1)
+	Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Icon.BackgroundTransparency = 1.000
+	Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Icon.BorderSizePixel = 0
+	Icon.Position = UDim2.new(0.275229394, 0, 0.437965214, 0)
+	Icon.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Icon.Font = Enum.Font.Arial
+	Icon.Text = "X"
+	Icon.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Icon.TextSize = 14.000
+
+	Icon_2.Name = "Icon"
+	Icon_2.Parent = Tp
+	Icon_2.AnchorPoint = Vector2.new(0.5, 1)
+	Icon_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Icon_2.BackgroundTransparency = 1.000
+	Icon_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Icon_2.BorderSizePixel = 0
+	Icon_2.Position = UDim2.new(0.498871505, 0, 0.437965214, 0)
+	Icon_2.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Icon_2.Font = Enum.Font.Arial
+	Icon_2.Text = "Y"
+	Icon_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Icon_2.TextSize = 14.000
+
+	Icon_3.Name = "Icon"
+	Icon_3.Parent = Tp
+	Icon_3.AnchorPoint = Vector2.new(0.5, 1)
+	Icon_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Icon_3.BackgroundTransparency = 1.000
+	Icon_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Icon_3.BorderSizePixel = 0
+	Icon_3.Position = UDim2.new(0.722513676, 0, 0.437965214, 0)
+	Icon_3.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Icon_3.Font = Enum.Font.Arial
+	Icon_3.Text = "Z"
+	Icon_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Icon_3.TextSize = 14.000
+
+	AdvencedMenu_2.Name = "AdvencedMenu"
+	AdvencedMenu_2.Parent = Menus
+
+	Aimbot.Name = "Aimbot"
+	Aimbot.Parent = AdvencedMenu_2
+	Aimbot.AnchorPoint = Vector2.new(1, 0.5)
+	Aimbot.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	Aimbot.BackgroundTransparency = 0.200
+	Aimbot.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Aimbot.BorderSizePixel = 0
+	Aimbot.Position = UDim2.new(0.949999988, 0, 0.25999999, 0)
+	Aimbot.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+	Aimbot.Visible = false
+
+	Name_5.Name = "Name"
+	Name_5.Parent = Aimbot
+	Name_5.AnchorPoint = Vector2.new(0, 0.5)
+	Name_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_5.BackgroundTransparency = 1.000
+	Name_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name_5.BorderSizePixel = 0
+	Name_5.Position = UDim2.new(0.00999998488, 0, 0.50000006, 0)
+	Name_5.Size = UDim2.new(0.150000006, 0, 0.800000012, 0)
+	Name_5.Font = Enum.Font.Arial
+	Name_5.Text = "Аимбот"
+	Name_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name_5.TextSize = 14.000
+	Name_5.TextXAlignment = Enum.TextXAlignment.Left
+
+	UICorner_7.Parent = Aimbot
+
+	UIGradient_9.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_9.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_9.Rotation = 2
+	UIGradient_9.Parent = Aimbot
+
+	Done4.Name = "Done4"
+	Done4.Parent = Aimbot
+	Done4.AnchorPoint = Vector2.new(1, 0.5)
+	Done4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done4.BackgroundTransparency = 1.000
+	Done4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done4.BorderSizePixel = 0
+	Done4.Position = UDim2.new(1, 0, 0.5, 0)
+	Done4.Size = UDim2.new(0.100000001, 0, 0.800000012, 0)
+	Done4.Font = Enum.Font.Arial
+	Done4.Text = "Вкл"
+	Done4.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done4.TextSize = 14.000
+
+	Bind.Name = "Bind"
+	Bind.Parent = Aimbot
+	Bind.AnchorPoint = Vector2.new(0.5, 1)
+	Bind.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Bind.BackgroundTransparency = 1.000
+	Bind.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Bind.BorderSizePixel = 0
+	Bind.Position = UDim2.new(0.274777204, 0, 0.837965071, 0)
+	Bind.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Bind.Font = Enum.Font.Arial
+	Bind.Text = "C"
+	Bind.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Bind.TextSize = 16.000
+
+	IconB.Name = "IconB"
+	IconB.Parent = Aimbot
+	IconB.AnchorPoint = Vector2.new(0.5, 1)
+	IconB.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	IconB.BackgroundTransparency = 1.000
+	IconB.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IconB.BorderSizePixel = 0
+	IconB.Position = UDim2.new(0.275229394, 0, 0.437965214, 0)
+	IconB.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	IconB.Font = Enum.Font.Arial
+	IconB.Text = "Бинд"
+	IconB.TextColor3 = Color3.fromRGB(255, 255, 255)
+	IconB.TextSize = 14.000
+
+	Wallhack.Name = "Wallhack"
+	Wallhack.Visible=false
+	Wallhack.Parent = AdvencedMenu_2
+	Wallhack.AnchorPoint = Vector2.new(1, 0.5)
+	Wallhack.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	Wallhack.BackgroundTransparency = 0.200
+	Wallhack.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Wallhack.BorderSizePixel = 0
+	Wallhack.Position = UDim2.new(0.949999988, 0, 0.529999971, 0)
+	Wallhack.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+
+	UICorner_8.Parent = Wallhack
+
+	UIGradient_10.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_10.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_10.Rotation = 2
+	UIGradient_10.Parent = Wallhack
+
+	Done5.Name = "Done5"
+	Done5.Parent = Wallhack
+	Done5.AnchorPoint = Vector2.new(1, 0.5)
+	Done5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done5.BackgroundTransparency = 1.000
+	Done5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done5.BorderSizePixel = 0
+	Done5.Position = UDim2.new(1, 0, 0.5, 0)
+	Done5.Size = UDim2.new(0.100000001, 0, 0.800000012, 0)
+	Done5.Font = Enum.Font.Arial
+	Done5.Text = "Вкл"
+	Done5.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done5.TextSize = 14.000
+
+	Name_6.Name = "Name"
+	Name_6.Parent = Wallhack
+	Name_6.AnchorPoint = Vector2.new(0, 0.5)
+	Name_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_6.BackgroundTransparency = 1.000
+	Name_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name_6.BorderSizePixel = 0
+	Name_6.Position = UDim2.new(0.00999998488, 0, 0.50000006, 0)
+	Name_6.Size = UDim2.new(0.150000006, 0, 0.800000012, 0)
+	Name_6.Font = Enum.Font.Arial
+	Name_6.Text = "ВХ"
+	Name_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name_6.TextSize = 14.000
+	Name_6.TextXAlignment = Enum.TextXAlignment.Left
+end
+
+local Done1=Done1
+local Done2=Done2
+local Done3=Done3
+local Done4=Done4
+local Done5=Done5
+local BasicMenu=BasicMenu
+local AdvencedMenu=AdvencedMenu
+
+local X,Y,Z=X,Y,Z
+
+local Player=Player
+local Number=Number
+local Main2=Main2
+
+--Func
+local Thread=nil
+local ThreadAim=nil
+local ThreadWH=nil
+local Aimbot=false
+local State=true
+local ESPstate=true
+
+local function tpPos(X,Y,Z)
+	if typeof(X or Y or Z)~="number" then warn("не число") return end
+	Exploiter.Character.PrimaryPart.CFrame=Exploiter.Character.PrimaryPart.CFrame*CFrame.new(X,Y,Z)
+end
+
+local function tpPlayer(PlayerName)
+	if not Players:FindFirstChild(PlayerName) then warn("не нашёл игрока") return end
+	local NowPlayer=Players:FindFirstChild(PlayerName)
+
+	local Chr=NowPlayer.Character or NowPlayer.CharacterAdded:Wait()
+
+	if Chr and Chr.PrimaryPart then
+		Exploiter.Character.PrimaryPart.CFrame=Chr.PrimaryPart.CFrame*CFrame.new(0,0,2)
+	end
+end
+
+local function setWalkSpeed(Number)
+	if typeof(Number)~="number" then warn("не число") return end
+	if Thread then coroutine.close(Thread) end
+	Thread=coroutine.create(function()
+		while task.wait() do
+			local Hum=nil
+			if not Exploiter.Character:FindFirstChildOfClass("Humanoid") then continue end
+			Hum=Exploiter.Character:FindFirstChildOfClass("Humanoid")
+
+			Hum.WalkSpeed=Number
+		end
+	end)
+	coroutine.resume(Thread)
+end
+
+local function drawESP()
+	for _,v in Players:GetPlayers() do
+		local Model=v.Character
+		if not Model or Model:FindFirstChild("ESP") or Model==Exploiter.Character then continue end
+
+		local Bild=Instance.new("BillboardGui",Model)
+		local Frame=Instance.new("Frame",Bild)
+		local UIs=Instance.new("UIStroke",Frame)
+
+		Bild.Name="ESP"
+		Bild.Size=UDim2.new(4,0,6,0)
+		Bild.Adornee=Model
+		Bild.AlwaysOnTop=true
+
+		Frame.BackgroundTransparency=1
+		Frame.AnchorPoint=Vector2.new(0.5,0.5)
+		Frame.Size=UDim2.new(1,0,1,0)
+		Frame.Position=UDim2.new(0.5,0,0.5,0)
+
+		UIs.Color=Color3.fromRGB(0, 255, 0)
+		UIs.Thickness=3
+	end
+end
+
+local function destoyESP()
+	for _,v in Players:GetPlayers() do
+		local Model=v.Character
+		if not Model or not Model:FindFirstChild("ESP") then continue end
+
+		Model.ESP:Destroy()
+	end
+end
+--Code
+
+local Open=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5, 0,0.5, 0)})
+local Close=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Sine),{Position=UDim2.new(0.5, 0,-1, 0)})
+
+UserInputService.InputBegan:Connect(function(input,gpe)
+	local int=input.KeyCode
+	if int==Enum.KeyCode.Insert and not gpe then
+		Done1.Modal=not Done1.Modal
+		if State then Open:Play() Main2.Visible=true else Close:Play() Main2.Visible=false end
+		State=not State
+	elseif int==Enum.KeyCode.Delete and not gpe then
+		Main:Destroy()
+		script:Destroy()
+	end
+end)
+local Instructions={
+	["Done1"]=function()
+		tpPos(tonumber(X.Text),tonumber(Y.Text),tonumber(Z.Text))
+	end,
+	["Done2"]=function()
+		tpPlayer(Player.Text)
+	end,
+	["Done3"]=function()
+		setWalkSpeed(tonumber(Number.Text))
+	end,
+	["Done4"]=function()
+		local C=nil
+		local tab={}
+
+		Done4.Text="Вкл"
+		Done4.TextColor3=Color3.fromRGB(68, 211, 46)
+
+		if ThreadAim then
+			coroutine.close(ThreadAim)
+			ThreadAim=nil
+			return
+		end
+
+		for _,Plr in Players:GetPlayers() do
+			if Plr.Character==Exploiter.Character then continue end
+			C=Plr.Character
+			if not C or not C.PrimaryPart then continue end
+			table.insert(tab,{C,(C.PrimaryPart.Position-Exploiter.Character.PrimaryPart.Position).Magnitude})
+		end
+		local min=math.huge
+		for _,v in tab do
+			if v[2]<min then min=v[2] end
+		end
+		for _,v in tab do
+			if v[2]==min then
+				C=v[1]
+				break
+			end
+		end
+
+		if not C or not C.PrimaryPart then return end
+		if not C:FindFirstChild("Head") then
+			if C.PrimaryPart then
+				ThreadAim=coroutine.create(function()
+					print(C.PrimaryPart,"osn")
+					while task.wait() do
+						Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
+					end
+				end)
+				coroutine.resume(ThreadAim)
+				Done4.Text="Выкл"
+				Done4.TextColor3=Color3.fromRGB(190, 18, 18)
+			else
+				return
+			end
+		else
+			ThreadAim=coroutine.create(function()
+				print(C.PrimaryPart,"Head")
+				while task.wait() do
+					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
+				end
+			end)
+			coroutine.resume(ThreadAim)
+			Done4.Text="Выкл"
+			Done4.TextColor3=Color3.fromRGB(190, 18, 18)
+		end
+	end,
+	["Done5"]=function()
+		if ESPstate then Done5.Text="Выкл" Done5.TextColor3=Color3.fromRGB(190, 18, 18) drawESP() else Done5.Text="Вкл" Done5.TextColor3=Color3.fromRGB(68, 211, 46) destoyESP() end
+		ESPstate=not ESPstate
+	end,
+}
+
+local Dones={Done1,Done2,Done3,Done4,Done5}
+for _,Button in Dones do
+	Button.MouseButton1Click:Connect(function()
+		Instructions[Button.Name]()
+	end)
+end
+
+local MenuNow="BasicMenu"
+local MenuLast=nil
+
+local MenusB={BasicMenu,AdvencedMenu}
+for _,Button in MenusB do
+	Button.MouseButton1Click:Connect(function()
+		MenuLast=MenuNow
+		MenuNow=Button.Name
+		for _,v in MainFrame.Menus[MenuNow]:GetChildren() do
+			v.Visible=true
+		end
+		for _,v in MainFrame.Menus[MenuLast]:GetChildren() do
+			if MenuLast~=MenuNow then
+				v.Visible=false
+			end
+		end
+	end)
+end
+
+UserInputService.InputBegan:Connect(function(input,gpe)
+	if input.KeyCode==Enum.KeyCode[Done4.Parent.Bind.Text] and not gpe then
+		Instructions[Done4.Name]()
+	end
+end)
+
+local Mouse=coroutine.create(function()
+	while task.wait() do
+		Main2.Position=UDim2.new(0,Exploiter:GetMouse().X,0,Exploiter:GetMouse().Y)
+	end
+end)
+coroutine.resume(Mouse)
