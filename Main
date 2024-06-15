@@ -99,6 +99,7 @@ if not Main then
 	local UIGradient_10 = Instance.new("UIGradient")
 	Done5 = Instance.new("TextButton")
 	local Name_6 = Instance.new("TextLabel")
+	Modal = Instance.new("TextButton")
 
 	--Properties:
 
@@ -648,6 +649,15 @@ if not Main then
 	Name_6.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Name_6.TextSize = 14.000
 	Name_6.TextXAlignment = Enum.TextXAlignment.Left
+	
+	Modal.Name = "Modal"
+	Modal.Parent = Cursor
+	Modal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Modal.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Modal.BorderSizePixel = 0
+	Modal.Font = Enum.Font.SourceSans
+	Modal.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Modal.TextSize = 14.000
 end
 
 local Done1=Done1
@@ -657,6 +667,7 @@ local Done4=Done4
 local Done5=Done5
 local BasicMenu=BasicMenu
 local AdvencedMenu=AdvencedMenu
+local Modal=Modal
 
 local X,Y,Z=X,Y,Z
 
@@ -743,7 +754,7 @@ local Close=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Sine
 UserInputService.InputBegan:Connect(function(input,gpe)
 	local int=input.KeyCode
 	if int==Enum.KeyCode.Insert and not gpe then
-		Done1.Modal=not Done1.Modal
+		Modal.Modal=not Modal.Modal
 		if State then Open:Play() Main2.Visible=true else Close:Play() Main2.Visible=false end
 		State=not State
 	elseif int==Enum.KeyCode.Delete and not gpe then
