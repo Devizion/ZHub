@@ -157,7 +157,7 @@ if not Main then
 	Name2.Position = UDim2.new(0.124121375, 0, 0.054962758, 0)
 	Name2.Size = UDim2.new(0.200000003, 0, 0.0850000009, 0)
 	Name2.Font = Enum.Font.Arial
-	Name2.Text = "SBU"
+	Name2.Text = "Z"
 	Name2.TextColor3 = Color3.fromRGB(186, 130, 41)
 	Name2.TextSize = 45.000
 	Name2.TextXAlignment = Enum.TextXAlignment.Left
@@ -806,7 +806,6 @@ local Instructions={
 		if not C:FindFirstChild("Head") then
 			if C.PrimaryPart then
 				ThreadAim=coroutine.create(function()
-					print(C.PrimaryPart,"osn")
 					while task.wait() do
 						Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
 					end
@@ -819,7 +818,6 @@ local Instructions={
 			end
 		else
 			ThreadAim=coroutine.create(function()
-				print(C.PrimaryPart,"Head")
 				while task.wait() do
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
 				end
