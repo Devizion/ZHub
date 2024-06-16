@@ -679,6 +679,7 @@ local Main2=Main2
 local Thread=nil
 local ThreadAim=nil
 local ThreadWH=nil
+local ThreadESP=nil
 local Aimbot=false
 local State=true
 local ESPstate=true
@@ -715,30 +716,40 @@ local function setWalkSpeed(Number)
 end
 
 local function drawESP()
-	for _,v in Players:GetPlayers() do
-		local Model=v.Character
-		if not Model or Model:FindFirstChild("ESP") or Model==Exploiter.Character then continue end
+	ThreadESP=coroutine.create(function()
+		while task.wait(.5) do
+			for _,v in Players:GetPlayers() do
+				local Model=v.Character
+				if not Model or Model:FindFirstChild("ESP") or Model==Exploiter.Character then continue end
 
-		local Bild=Instance.new("BillboardGui",Model)
-		local Frame=Instance.new("Frame",Bild)
-		local UIs=Instance.new("UIStroke",Frame)
+				local Bild=Instance.new("BillboardGui",Model)
+				local Frame=Instance.new("Frame",Bild)
+				local UIs=Instance.new("UIStroke",Frame)
 
-		Bild.Name="ESP"
-		Bild.Size=UDim2.new(4,0,6,0)
-		Bild.Adornee=Model
-		Bild.AlwaysOnTop=true
+				Bild.Name="ESP"
+				Bild.Size=UDim2.new(4,0,6,0)
+				Bild.Adornee=Model
+				Bild.AlwaysOnTop=true
 
-		Frame.BackgroundTransparency=1
-		Frame.AnchorPoint=Vector2.new(0.5,0.5)
-		Frame.Size=UDim2.new(1,0,1,0)
-		Frame.Position=UDim2.new(0.5,0,0.5,0)
+				Frame.BackgroundTransparency=1
+				Frame.AnchorPoint=Vector2.new(0.5,0.5)
+				Frame.Size=UDim2.new(1,0,1,0)
+				Frame.Position=UDim2.new(0.5,0,0.5,0)
 
-		UIs.Color=Color3.fromRGB(0, 255, 0)
-		UIs.Thickness=3
-	end
+				UIs.Color=Color3.fromRGB(0, 255, 0)
+				UIs.Thickness=3
+			end
+		end
+	end)
+	coroutine.resume(ThreadESP)
 end
 
 local function destoyESP()
+	if ThreadESP then
+		coroutine.close(ThreadESP)
+		ThreadESP=nil
+	end
+	
 	for _,v in Players:GetPlayers() do
 		local Model=v.Character
 		if not Model or not Model:FindFirstChild("ESP") then continue end
@@ -806,6 +817,7 @@ local Instructions={
 		if not C:FindFirstChild("Head") then
 			if C.PrimaryPart then
 				ThreadAim=coroutine.create(function()
+					print(C.PrimaryPart,"osn")
 					while task.wait() do
 						Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
 					end
@@ -818,6 +830,7 @@ local Instructions={
 			end
 		else
 			ThreadAim=coroutine.create(function()
+				print(C.PrimaryPart,"Head")
 				while task.wait() do
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
 				end
