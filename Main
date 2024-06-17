@@ -861,14 +861,14 @@ local Instructions={
 			C=Plr.Character
 			if not C or not C.PrimaryPart then continue end
 			
-			local Pos=Camera.WorldToScreenPoint(Camera,Plr.Character.PrimaryPart.Position)
+			local Pos,OnScreen=Camera:WorldToScreenPoint(Plr.Character.PrimaryPart.Position)
 			Vec2P,Vec2M=Vector2.new(Pos.X,Pos.Y),Vector2.new(Mouse.X,Mouse.Y)
 			
 			table.insert(tab,{C,(Vec2P-Vec2M).Magnitude})
 			
 			local min=math.huge
 			for _,v in tab do
-				if v[2]<min and v[2]<tonumber(FOV.Text) then min=v[2] else min=nil end
+				if v[2]<min and v[2]<=tonumber(FOV.Text) and OnScreen==true then min=v[2] end
 			end
 			for _,v in tab do
 				if min==nil then return end
@@ -957,5 +957,7 @@ end)
 coroutine.resume(Mouse)
 
 FOV:GetPropertyChangedSignal("Text"):Connect(function()
-	Circle.Size=UDim2.new(0,tonumber(FOV.Text)*2,0,tonumber(FOV.Text)*2)
+	if typeof(tonumber(FOV.Text))=="number" and FOV.Text~="" then
+		Circle.Size=UDim2.new(0,tonumber(FOV.Text)*2,0,tonumber(FOV.Text)*2)
+	end
 end)
