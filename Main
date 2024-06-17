@@ -183,7 +183,7 @@ if not Main then
 	ver.Position = UDim2.new(0.980000019, 0, 1, 0)
 	ver.Size = UDim2.new(0.200000003, 0, 0.100000001, 0)
 	ver.Font = Enum.Font.Arial
-	ver.Text = "v0.5"
+	ver.Text = "v0.7"
 	ver.TextColor3 = Color3.fromRGB(186, 186, 186)
 	ver.TextSize = 14.000
 	ver.TextTransparency = 0.500
@@ -852,7 +852,6 @@ local Instructions={
 		if ThreadAim then
 			coroutine.close(ThreadAim)
 			ThreadAim=nil
-			Circle.Visible=false
 			return
 		end
 		
@@ -870,9 +869,11 @@ local Instructions={
 			
 			local min=math.huge
 			for _,v in tab do
-				if v[2]<min and v[2]<=tonumber(FOV.Text) then min=v[2] end
+				if v[2]<min and v[2]<tonumber(FOV.Text) then min=v[2] else min=nil end
 			end
 			for _,v in tab do
+				if min==nil then return end
+				
 				if v[2]==min then
 					C=v[1]
 					break
@@ -905,7 +906,6 @@ local Instructions={
 			coroutine.resume(ThreadAim)
 			Done4.Text="Выкл"
 			Done4.TextColor3=Color3.fromRGB(190, 18, 18)
-			Circle.Visible=true
 		end
 	end,
 	["Done5"]=function()
