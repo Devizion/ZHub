@@ -18,6 +18,7 @@ if not Main then
 	local CursorM = Instance.new("Frame")
 
 	Cursor.Name = "Cursor"
+	Cursor.ResetOnSpawn = false
 	Cursor.DisplayOrder=101
 	Cursor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -696,6 +697,8 @@ if not Main then
 	IconB_2.TextSize = 14.000
 	
 	AimBound.Name = "AimBound"
+	AimBound.ResetOnSpawn = false
+	AimBound.DisplayOrder=99
 	AimBound.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
