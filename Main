@@ -850,18 +850,19 @@ local Instructions={
 
 		if ThreadAim then
 			coroutine.close(ThreadAim)
+			tab={}
 			ThreadAim=nil
 			return
 		end
 		
 		for _,Plr in Players:GetPlayers() do
-			local Vec2P,Vec2M=nil
+			local Vec2P,Vec2M,Pos,OnScreen=nil
 			
 			if Plr.Character==Exploiter.Character then continue end
 			C=Plr.Character
 			if not C or not C.PrimaryPart then continue end
 			
-			local Pos,OnScreen=Camera:WorldToScreenPoint(Plr.Character.PrimaryPart.Position)
+			Pos,OnScreen=Camera:WorldToScreenPoint(Plr.Character.PrimaryPart.Position)
 			Vec2P,Vec2M=Vector2.new(Pos.X,Pos.Y),Vector2.new(Mouse.X,Mouse.Y)
 			
 			if OnScreen==true then
@@ -870,18 +871,17 @@ local Instructions={
 		end
 		local min=math.huge
 		
-		for _,v in tab do
-			if v[2]<min and v[2]<=tonumber(FOV.Text) then min=v[2] end
-		end
-		for _,v in tab do
-			if min==nil then return end
-
-			if v[2]==min then
-				C=v[1]
-				break
+		if #tab>0 then
+			for _,v in tab do
+				if v[2]<min and v[2]<=tonumber(FOV.Text) then min=v[2] end
+			end
+			for _,v in tab do
+				if v[2]==min then
+					C=v[1]
+					break
+				end
 			end
 		end
-		
 		
 		if not C or not C.PrimaryPart then return end
 		if not C:FindFirstChild("Head") then
