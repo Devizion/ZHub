@@ -6,6 +6,7 @@ local RunService=game:GetService("RunService")
 --Const
 local Exploiter=Players.LocalPlayer
 local Camera=workspace.CurrentCamera
+local Mouse=Exploiter:GetMouse()
 --Create Gui
 
 local Main=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Main")
@@ -100,6 +101,12 @@ if not Main then
 	Done5 = Instance.new("TextButton")
 	local Name_6 = Instance.new("TextLabel")
 	Modal = Instance.new("TextButton")
+	local IconB_2 = Instance.new("TextLabel")
+	FOV = Instance.new("TextBox")
+	local AimBound = Instance.new("ScreenGui")
+	Circle = Instance.new("Frame")
+	local UICorner_9 = Instance.new("UICorner")
+	local UIStroke = Instance.new("UIStroke")
 
 	--Properties:
 
@@ -651,6 +658,7 @@ if not Main then
 	Name_6.TextXAlignment = Enum.TextXAlignment.Left
 	
 	Modal.Name = "Modal"
+	Modal.Text=""
 	Modal.Parent = Cursor
 	Modal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Modal.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -658,6 +666,56 @@ if not Main then
 	Modal.Font = Enum.Font.SourceSans
 	Modal.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Modal.TextSize = 14.000
+	
+	FOV.Name = "FOV"
+	FOV.Parent = Aimbot
+	FOV.AnchorPoint = Vector2.new(0.5, 1)
+	FOV.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	FOV.BackgroundTransparency = 1.000
+	FOV.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	FOV.BorderSizePixel = 0
+	FOV.Position = UDim2.new(0.499777138, 0, 0.837965071, 0)
+	FOV.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	FOV.Font = Enum.Font.Arial
+	FOV.Text = "50"
+	FOV.TextColor3 = Color3.fromRGB(255, 255, 255)
+	FOV.TextSize = 16.000
+	
+	IconB_2.Name = "IconB"
+	IconB_2.Parent = Aimbot
+	IconB_2.AnchorPoint = Vector2.new(0.5, 1)
+	IconB_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_2.BackgroundTransparency = 1.000
+	IconB_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IconB_2.BorderSizePixel = 0
+	IconB_2.Position = UDim2.new(0.498871505, 0, 0.437965214, 0)
+	IconB_2.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	IconB_2.Font = Enum.Font.Arial
+	IconB_2.Text = "Фов"
+	IconB_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_2.TextSize = 14.000
+	
+	AimBound.Name = "AimBound"
+	AimBound.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Circle.Name = "Circle"
+	Circle.Visible=false
+	Circle.Parent = AimBound
+	Circle.AnchorPoint = Vector2.new(0.5, 0.5)
+	Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Circle.BackgroundTransparency = 1.000
+	Circle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Circle.BorderSizePixel = 0
+	Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Circle.Size = UDim2.new(0, 100, 0, 100)
+
+	UICorner_9.CornerRadius = UDim.new(1, 0)
+	UICorner_9.Parent = Circle
+
+	UIStroke.Parent = Circle
+	UIStroke.Color=Color3.fromRGB(0,255,0)
+	UIStroke.Thickness=1.5
 end
 
 local Done1=Done1
@@ -668,6 +726,7 @@ local Done5=Done5
 local BasicMenu=BasicMenu
 local AdvencedMenu=AdvencedMenu
 local Modal=Modal
+local FOV=FOV
 
 local X,Y,Z=X,Y,Z
 
@@ -793,31 +852,39 @@ local Instructions={
 		if ThreadAim then
 			coroutine.close(ThreadAim)
 			ThreadAim=nil
+			Circle.Visible=false
 			return
 		end
-
+		
 		for _,Plr in Players:GetPlayers() do
+			local Vec2P,Vec2M=nil
+			
 			if Plr.Character==Exploiter.Character then continue end
 			C=Plr.Character
 			if not C or not C.PrimaryPart then continue end
-			table.insert(tab,{C,(C.PrimaryPart.Position-Exploiter.Character.PrimaryPart.Position).Magnitude})
-		end
-		local min=math.huge
-		for _,v in tab do
-			if v[2]<min then min=v[2] end
-		end
-		for _,v in tab do
-			if v[2]==min then
-				C=v[1]
-				break
+			
+			local Pos=Camera.WorldToScreenPoint(Camera,Plr.Character.PrimaryPart.Position)
+			Vec2P,Vec2M=Vector2.new(Pos.X,Pos.Y),Vector2.new(Mouse.X,Mouse.Y)
+			
+			table.insert(tab,{C,(Vec2P-Vec2M).Magnitude})
+			
+			local min=math.huge
+			for _,v in tab do
+				if v[2]<min and v[2]<=tonumber(FOV.Text) then min=v[2] end
+			end
+			for _,v in tab do
+				if v[2]==min then
+					C=v[1]
+					break
+				end
 			end
 		end
-
+		
+		
 		if not C or not C.PrimaryPart then return end
 		if not C:FindFirstChild("Head") then
 			if C.PrimaryPart then
 				ThreadAim=coroutine.create(function()
-					print(C.PrimaryPart,"osn")
 					while task.wait() do
 						Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
 					end
@@ -825,12 +892,12 @@ local Instructions={
 				coroutine.resume(ThreadAim)
 				Done4.Text="Выкл"
 				Done4.TextColor3=Color3.fromRGB(190, 18, 18)
+				Circle.Visible=true
 			else
 				return
 			end
 		else
 			ThreadAim=coroutine.create(function()
-				print(C.PrimaryPart,"Head")
 				while task.wait() do
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
 				end
@@ -838,10 +905,15 @@ local Instructions={
 			coroutine.resume(ThreadAim)
 			Done4.Text="Выкл"
 			Done4.TextColor3=Color3.fromRGB(190, 18, 18)
+			Circle.Visible=true
 		end
 	end,
 	["Done5"]=function()
-		if ESPstate then Done5.Text="Выкл" Done5.TextColor3=Color3.fromRGB(190, 18, 18) drawESP() else Done5.Text="Вкл" Done5.TextColor3=Color3.fromRGB(68, 211, 46) destoyESP() end
+		if ESPstate then 
+			Done5.Text="Выкл" Done5.TextColor3=Color3.fromRGB(190, 18, 18) drawESP() 
+		else 
+			Done5.Text="Вкл" Done5.TextColor3=Color3.fromRGB(68, 211, 46) destoyESP()
+		end
 		ESPstate=not ESPstate
 	end,
 }
@@ -880,7 +952,12 @@ end)
 
 local Mouse=coroutine.create(function()
 	while task.wait() do
-		Main2.Position=UDim2.new(0,Exploiter:GetMouse().X,0,Exploiter:GetMouse().Y)
+		Main2.Position=UDim2.new(0,Mouse.X,0,Mouse.Y)
+		Circle.Position=UDim2.new(0,Mouse.X,0,Mouse.Y)
 	end
 end)
 coroutine.resume(Mouse)
+
+FOV:GetPropertyChangedSignal("Text"):Connect(function()
+	Circle.Size=UDim2.new(0,tonumber(FOV.Text)*2,0,tonumber(FOV.Text)*2)
+end)
