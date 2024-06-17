@@ -878,12 +878,9 @@ local Instructions={
 			for _,v in tab  do
 				if v[2]==min then
 					C=v[1]
-					tab={}
 					break
 				end
 			end
-		else
-			return
 		end
 		
 		if not C or not C.PrimaryPart or #tab==0 then return end
