@@ -850,7 +850,6 @@ local Instructions={
 
 		if ThreadAim then
 			coroutine.close(ThreadAim)
-			tab={}
 			ThreadAim=nil
 			return
 		end
@@ -887,7 +886,7 @@ local Instructions={
 			return
 		end
 		
-		if not C or not C.PrimaryPart then return end
+		if not C or not C.PrimaryPart or #tab==0 then return end
 		if not C:FindFirstChild("Head") then
 			if C.PrimaryPart then
 				ThreadAim=coroutine.create(function()
