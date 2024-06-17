@@ -892,7 +892,6 @@ local Instructions={
 				coroutine.resume(ThreadAim)
 				Done4.Text="Выкл"
 				Done4.TextColor3=Color3.fromRGB(190, 18, 18)
-				Circle.Visible=true
 			else
 				return
 			end
