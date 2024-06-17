@@ -860,24 +860,23 @@ local Instructions={
 			
 			if Plr.Character==Exploiter.Character then continue end
 			C=Plr.Character
-			if not C or not C.PrimaryPart then continue end
+			if not C or not C.PrimaryPart then C=nil continue end
 			
 			Pos,OnScreen=Camera:WorldToScreenPoint(Plr.Character.PrimaryPart.Position)
 			Vec2P,Vec2M=Vector2.new(Pos.X,Pos.Y),Vector2.new(Mouse.X,Mouse.Y)
 			
 			if OnScreen==true then
-				table.insert(tab,{C,(Vec2P-Vec2M).Magnitude})
+				table.insert(tab,{C,(Vec2P-Vec2M).Magnitude,OnScreen})
 			end
 		end
-		local min=math.huge
 		
-		C=nil
+		local min=math.huge
 		if #tab>0 then
 			for _,v in tab do
-				if v[2]<min and v[2]<=tonumber(FOV.Text) then min=v[2] end
+				if v[2]<min and v[2]<=tonumber(FOV.Text) and v[3]==true then min=v[2] end
 			end
-			for _,v in tab do
-				if v[2]==min then
+			for _,v in tab  do
+				if v[2]==min and v[3]==true then
 					C=v[1]
 					break
 				end
