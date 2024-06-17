@@ -871,8 +871,8 @@ local Instructions={
 		end
 		local min=math.huge
 		
+		C=nil
 		if #tab>0 then
-			print(table.unpack(tab))
 			for _,v in tab do
 				if v[2]<min and v[2]<=tonumber(FOV.Text) then min=v[2] end
 			end
@@ -899,7 +899,6 @@ local Instructions={
 				return
 			end
 		else
-			print(table.unpack(tab))
 			ThreadAim=coroutine.create(function()
 				while task.wait() do
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
