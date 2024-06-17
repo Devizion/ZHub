@@ -899,6 +899,7 @@ local Instructions={
 				return
 			end
 		else
+			print(table.unpack(tab))
 			ThreadAim=coroutine.create(function()
 				while task.wait() do
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
