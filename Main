@@ -742,6 +742,8 @@ local Aimbot=false
 local State=true
 local ESPstate=true
 
+local tab={}
+
 local function tpPos(X,Y,Z)
 	if typeof(X or Y or Z)~="number" then warn("не число") return end
 	Exploiter.Character.PrimaryPart.CFrame=Exploiter.Character.PrimaryPart.CFrame*CFrame.new(X,Y,Z)
@@ -843,13 +845,14 @@ local Instructions={
 	end,
 	["Done4"]=function()
 		local C=nil
-		local tab={}
+		table.clear(tab)
 
 		Done4.Text="Вкл"
 		Done4.TextColor3=Color3.fromRGB(68, 211, 46)
 
 		if ThreadAim then
 			coroutine.close(ThreadAim)
+			table.clear(tab)
 			ThreadAim=nil
 			return
 		end
