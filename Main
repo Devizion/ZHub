@@ -913,6 +913,7 @@ if not Main then
 	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	Circle.Name = "Circle"
+	Circle.Visible=false
 	Circle.Parent = AimBound
 	Circle.AnchorPoint = Vector2.new(0.5, 0.5)
 	Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
