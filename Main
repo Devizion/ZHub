@@ -9,8 +9,8 @@ local Camera=workspace.CurrentCamera
 local Mouse=Exploiter:GetMouse()
 
 --step1
-local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
---local Library={{Username="admin";Password="admin"}}
+--local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
+local Library={{Username="admin";Password="admin"}}
 local CompleteAuto=false
 --Create Gui
 local Instalation = Instance.new("ScreenGui")
@@ -27,6 +27,7 @@ local Username = Instance.new("Frame")
 local User = Instance.new("TextBox")
 local Password = Instance.new("Frame")
 local Pass = Instance.new("TextBox")
+local Modal = Instance.new("TextButton")
 
 Instalation.Name = "Instalation"
 Instalation.ResetOnSpawn = false
@@ -43,6 +44,17 @@ Main.BorderSizePixel = 0
 Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Size = UDim2.new(1, 0, 1, 0)
 Main.SizeConstraint = Enum.SizeConstraint.RelativeXX
+
+Modal.Name = "Modal"
+Modal.Text=""
+Modal.Modal = true
+Modal.Parent = Instalation
+Modal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Modal.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Modal.BorderSizePixel = 0
+Modal.Font = Enum.Font.SourceSans
+Modal.TextColor3 = Color3.fromRGB(0, 0, 0)
+Modal.TextSize = 14.000
 
 Name2.Name = "Name2"
 Name2.Parent = Main
