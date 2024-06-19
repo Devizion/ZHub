@@ -163,7 +163,7 @@ local NONThread=coroutine.create(function()
 	while task.wait() do
 		for i=180,-180,-4 do
 			task.wait()
-			Z.Rotation=i
+			UIGradient=i
 		end
 	end
 end)
