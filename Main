@@ -163,7 +163,7 @@ local NONThread=coroutine.create(function()
 	while task.wait() do
 		for i=180,-180,-4 do
 			task.wait()
-			UIGradient=i
+			UIGradient.Rotation=i
 		end
 	end
 end)
@@ -177,21 +177,38 @@ task.wait(1)
 TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
 
 local aWaitThread=coroutine.create(function()
-	while task.wait(1) do
+	User:GetPropertyChangedSignal("Text"):Connect(function()
 		local U,P=User.Text,Pass.Text
-		
 		for i,v in Library do
-			if v[1]==U and v[2]==P then
+			print(v)
+			if v["Username"]==U and v["Password"]==P then
 				CompleteAuto=true
 				break
 			end
 		end
-	end
+	end)
+	Pass:GetPropertyChangedSignal("Text"):Connect(function()
+		local U,P=User.Text,Pass.Text
+		for i,v in Library do
+			print(v)
+			if v["Username"]==U and v["Password"]==P then
+				CompleteAuto=true
+				break
+			end
+		end
+	end)
 end)
 coroutine.resume(aWaitThread)
 
 repeat task.wait(1) until CompleteAuto==true
 coroutine.close(NONThread) coroutine.close(aWaitThread)
+
+TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(0,0,0.5,0)}):Play()
+task.wait(1)
+TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5, 0,0.5, 0)}):Play()
+task.wait(2)
+TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5,0,1,0)}):Play()
+task.wait(1)
 
 --step2
 --Create Gui
@@ -1022,6 +1039,8 @@ end
 
 local Open=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5, 0,0.5, 0)})
 local Close=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Sine),{Position=UDim2.new(0.5, 0,-1, 0)})
+
+Open:Play()
 
 UserInputService.InputBegan:Connect(function(input,gpe)
 	local int=input.KeyCode
