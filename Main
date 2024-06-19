@@ -176,29 +176,22 @@ TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.35, 0,0.5, 0)})
 task.wait(1)
 TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
 
+local DataModel={User,Pass}
+
 local aWaitThread=coroutine.create(function()
-	task.wait(1)
-	User:GetPropertyChangedSignal("Text"):Connect(function()
-		local U,P=User.Text,Pass.Text
-		for i,v in Library do
-			print(v)
-			if v["Username"]==U and v["Password"]==P then
-				CompleteAuto=true
-				break
+	for _,Data in DataModel do
+		Data:GetPropertyChangedSignal("Text"):Connect(function()
+			task.wait(1)
+			local U,P=User.Text,Pass.Text
+			for i,v in Library do
+				print(v)
+				if v["Username"]==U and v["Password"]==P then
+					CompleteAuto=true
+					break
+				end
 			end
-		end
-	end)
-	Pass:GetPropertyChangedSignal("Text"):Connect(function()
-		task.wait(1)
-		local U,P=User.Text,Pass.Text
-		for i,v in Library do
-			print(v)
-			if v["Username"]==U and v["Password"]==P then
-				CompleteAuto=true
-				break
-			end
-		end
-	end)
+		end)
+	end
 end)
 coroutine.resume(aWaitThread)
 
@@ -248,7 +241,7 @@ if not Main then
 	CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	CursorM.BorderSizePixel = 0
 	CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
-
+	--
 	Main = Instance.new("ScreenGui")
 	MainFrame = Instance.new("Frame")
 	local UIGradient = Instance.new("UIGradient")
@@ -315,6 +308,8 @@ if not Main then
 	Circle = Instance.new("Frame")
 	local UICorner_9 = Instance.new("UICorner")
 	local UIStroke = Instance.new("UIStroke")
+	local IconB_3 = Instance.new("TextLabel")
+	Done6 = Instance.new("TextButton")
 
 	--Properties:
 
@@ -933,6 +928,34 @@ if not Main then
 	UIStroke.Parent = Circle
 	UIStroke.Color=Color3.fromRGB(0,255,0)
 	UIStroke.Thickness=1.5
+	
+	IconB_3.Name = "IconB"
+	IconB_3.Parent = Aimbot
+	IconB_3.AnchorPoint = Vector2.new(0.5, 1)
+	IconB_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_3.BackgroundTransparency = 1.000
+	IconB_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IconB_3.BorderSizePixel = 0
+	IconB_3.Position = UDim2.new(0.722513676, 0, 0.437965214, 0)
+	IconB_3.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	IconB_3.Font = Enum.Font.Arial
+	IconB_3.Text = "Вкл фов рендер"
+	IconB_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_3.TextSize = 14.000
+
+	Done6.Name = "Done6"
+	Done6.Parent = Aimbot
+	Done6.AnchorPoint = Vector2.new(0.5, 1)
+	Done6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done6.BackgroundTransparency = 1.000
+	Done6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done6.BorderSizePixel = 0
+	Done6.Position = UDim2.new(0.72299999, 0, 1, 0)
+	Done6.Size = UDim2.new(0.100000001, 0, 0.699999988, 0)
+	Done6.Font = Enum.Font.Arial
+	Done6.Text = "Вкл"
+	Done6.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done6.TextSize = 14.000
 end
 
 local Done1=Done1
@@ -1144,9 +1167,19 @@ local Instructions={
 		end
 		ESPstate=not ESPstate
 	end,
+	["Done6"]=function()
+		Circle.Visible=not Circle.Visible
+		if Circle.Visible==true then
+			Done6.Text="Выкл"
+			Done6.TextColor3=Color3.fromRGB(190, 18, 18)
+		else
+			Done6.Text="Вкл"
+			Done6.TextColor3=Color3.fromRGB(68, 211, 46)
+		end
+	end,
 }
 
-local Dones={Done1,Done2,Done3,Done4,Done5}
+local Dones={Done1,Done2,Done3,Done4,Done5,Done6}
 for _,Button in Dones do
 	Button.MouseButton1Click:Connect(function()
 		Instructions[Button.Name]()
