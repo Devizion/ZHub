@@ -10,6 +10,7 @@ local Mouse=Exploiter:GetMouse()
 
 --step1
 local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
+--local Library={{Username="admin";Password="admin"}}
 local CompleteAuto=false
 --Create Gui
 local Instalation = Instance.new("ScreenGui")
@@ -28,6 +29,7 @@ local Password = Instance.new("Frame")
 local Pass = Instance.new("TextBox")
 
 Instalation.Name = "Instalation"
+Instalation.ResetOnSpawn = false
 Instalation.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -1169,7 +1171,7 @@ local Instructions={
 		ESPstate=not ESPstate
 	end,
 	["Done6"]=function()
-		if Circle.Visible==true then
+		if Circle.Visible==false then
 			Done6.Text="Выкл"
 			Done6.TextColor3=Color3.fromRGB(190, 18, 18)
 		else
