@@ -1169,7 +1169,6 @@ local Instructions={
 		ESPstate=not ESPstate
 	end,
 	["Done6"]=function()
-		Circle.Visible=not Circle.Visible
 		if Circle.Visible==true then
 			Done6.Text="Выкл"
 			Done6.TextColor3=Color3.fromRGB(190, 18, 18)
@@ -1177,6 +1176,7 @@ local Instructions={
 			Done6.Text="Вкл"
 			Done6.TextColor3=Color3.fromRGB(68, 211, 46)
 		end
+		Circle.Visible=not Circle.Visible
 	end,
 }
 
