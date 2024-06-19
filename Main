@@ -169,7 +169,7 @@ local NONThread=coroutine.create(function()
 end)
 coroutine.resume(NONThread)
 
-TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Quint),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
+TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
 TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
 task.wait(2)
 TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.35, 0,0.5, 0)}):Play()
@@ -177,6 +177,7 @@ task.wait(1)
 TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
 
 local aWaitThread=coroutine.create(function()
+	task.wait(1)
 	User:GetPropertyChangedSignal("Text"):Connect(function()
 		local U,P=User.Text,Pass.Text
 		for i,v in Library do
@@ -188,6 +189,7 @@ local aWaitThread=coroutine.create(function()
 		end
 	end)
 	Pass:GetPropertyChangedSignal("Text"):Connect(function()
+		task.wait(1)
 		local U,P=User.Text,Pass.Text
 		for i,v in Library do
 			print(v)
@@ -210,6 +212,7 @@ task.wait(2)
 TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5,0,1,0)}):Play()
 task.wait(1)
 
+Instalation:Destroy()
 --step2
 --Create Gui
 
@@ -1040,7 +1043,9 @@ end
 local Open=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5, 0,0.5, 0)})
 local Close=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Sine),{Position=UDim2.new(0.5, 0,-1, 0)})
 
+Modal.Modal=not Modal.Modal
 Open:Play()
+State=not State
 
 UserInputService.InputBegan:Connect(function(input,gpe)
 	local int=input.KeyCode
