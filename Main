@@ -7,6 +7,193 @@ local RunService=game:GetService("RunService")
 local Exploiter=Players.LocalPlayer
 local Camera=workspace.CurrentCamera
 local Mouse=Exploiter:GetMouse()
+
+--step1
+local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
+local CompleteAuto=false
+--Create Gui
+local Instalation = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local Name2 = Instance.new("TextLabel")
+local UIGradient = Instance.new("UIGradient")
+local Place = Instance.new("Frame")
+local Autorize = Instance.new("Frame")
+local UIGradient_2 = Instance.new("UIGradient")
+local UICorner = Instance.new("UICorner")
+local Stroke = Instance.new("Frame")
+local Data = Instance.new("Folder")
+local Username = Instance.new("Frame")
+local User = Instance.new("TextBox")
+local Password = Instance.new("Frame")
+local Pass = Instance.new("TextBox")
+
+Instalation.Name = "Instalation"
+Instalation.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = Instalation
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main.BackgroundTransparency = 1.000
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+Main.Size = UDim2.new(1, 0, 1, 0)
+Main.SizeConstraint = Enum.SizeConstraint.RelativeXX
+
+Name2.Name = "Name2"
+Name2.Parent = Main
+Name2.AnchorPoint = Vector2.new(0.5, 0.5)
+Name2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name2.BackgroundTransparency = 1.000
+Name2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Name2.BorderSizePixel = 0
+Name2.Position = UDim2.new(0.5, 0, 1, 0)
+Name2.Size = UDim2.new(0.0500000007, 0, 0.0799999982, 0)
+Name2.Font = Enum.Font.Arial
+Name2.Text = "Z"
+Name2.TextColor3 = Color3.fromRGB(186, 130, 41)
+Name2.TextScaled = true
+Name2.TextSize = 100.000
+Name2.TextWrapped = true
+Name2.TextXAlignment = Enum.TextXAlignment.Left
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(198, 152, 51)), ColorSequenceKeypoint.new(0.92, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+UIGradient.Rotation = 180
+UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.55, 0.00), NumberSequenceKeypoint.new(1.00, 0.00)}
+UIGradient.Parent = Name2
+
+Place.Name = "Place"
+Place.Parent = Main
+Place.AnchorPoint = Vector2.new(0, 0.5)
+Place.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Place.BackgroundTransparency = 1.000
+Place.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Place.BorderSizePixel = 0
+Place.ClipsDescendants = true
+Place.Position = UDim2.new(0.375, 0, 0.5, 0)
+Place.Size = UDim2.new(0.300000012, 0, 0.0799999982, 0)
+
+Autorize.Name = "Autorize"
+Autorize.Parent = Place
+Autorize.AnchorPoint = Vector2.new(1, 0.5)
+Autorize.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+Autorize.BackgroundTransparency = 0.200
+Autorize.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Autorize.BorderSizePixel = 0
+Autorize.ClipsDescendants = true
+Autorize.Position = UDim2.new(0, 0, 0.5, 0)
+Autorize.Size = UDim2.new(1, 0, 1, 0)
+
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 146, 83)), ColorSequenceKeypoint.new(0.42, Color3.fromRGB(255, 146, 83)), ColorSequenceKeypoint.new(0.92, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+UIGradient_2.Offset = Vector2.new(-0.400000006, 0)
+UIGradient_2.Rotation = 59
+UIGradient_2.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.55, 0.00), NumberSequenceKeypoint.new(1.00, 0.00)}
+UIGradient_2.Parent = Autorize
+
+UICorner.Parent = Autorize
+
+Stroke.Name = "Stroke"
+Stroke.Parent = Autorize
+Stroke.AnchorPoint = Vector2.new(0, 0.5)
+Stroke.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+Stroke.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Stroke.BorderSizePixel = 0
+Stroke.Position = UDim2.new(0.0250000004, 0, 0.5, 0)
+Stroke.Size = UDim2.new(0.00999999978, 0, 0.800000012, 0)
+
+Data.Name = "Data"
+Data.Parent = Autorize
+
+Username.Name = "Username"
+Username.Parent = Data
+Username.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Username.BackgroundTransparency = 0.500
+Username.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Username.BorderSizePixel = 0
+Username.Position = UDim2.new(0.100000001, 0, 0.100000001, 0)
+Username.Size = UDim2.new(0.800000012, 0, 0.349999994, 0)
+
+User.Name = "User"
+User.Parent = Username
+User.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+User.BackgroundTransparency = 1.000
+User.BorderColor3 = Color3.fromRGB(0, 0, 0)
+User.BorderSizePixel = 0
+User.Position = UDim2.new(0.0199999996, 0, 0, 0)
+User.Size = UDim2.new(0.899999976, 0, 1, 0)
+User.ClearTextOnFocus = false
+User.Font = Enum.Font.Arial
+User.PlaceholderColor3 = Color3.fromRGB(121, 121, 121)
+User.PlaceholderText = "Username"
+User.Text = ""
+User.TextColor3 = Color3.fromRGB(255, 255, 255)
+User.TextSize = 14.000
+User.TextXAlignment = Enum.TextXAlignment.Left
+
+Password.Name = "Password"
+Password.Parent = Data
+Password.AnchorPoint = Vector2.new(0, 1)
+Password.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Password.BackgroundTransparency = 0.500
+Password.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Password.BorderSizePixel = 0
+Password.Position = UDim2.new(0.100000001, 0, 0.899999976, 0)
+Password.Size = UDim2.new(0.800000012, 0, 0.349999994, 0)
+
+Pass.Name = "Pass"
+Pass.Parent = Password
+Pass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Pass.BackgroundTransparency = 1.000
+Pass.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Pass.BorderSizePixel = 0
+Pass.Position = UDim2.new(0.0199999996, 0, 0, 0)
+Pass.Size = UDim2.new(0.899999976, 0, 1, 0)
+Pass.ClearTextOnFocus = false
+Pass.Font = Enum.Font.Arial
+Pass.PlaceholderColor3 = Color3.fromRGB(121, 121, 121)
+Pass.PlaceholderText = "Password"
+Pass.Text = ""
+Pass.TextColor3 = Color3.fromRGB(255, 255, 255)
+Pass.TextSize = 14.000
+Pass.TextXAlignment = Enum.TextXAlignment.Left
+
+local NONThread=coroutine.create(function()
+	while task.wait() do
+		for i=180,-180,-4 do
+			task.wait()
+			Z.Rotation=i
+		end
+	end
+end)
+coroutine.resume(NONThread)
+
+TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Quint),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
+TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
+task.wait(2)
+TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.35, 0,0.5, 0)}):Play()
+task.wait(1)
+TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
+
+local aWaitThread=coroutine.create(function()
+	while task.wait(1) do
+		local U,P=User.Text,Pass.Text
+		
+		for i,v in Library do
+			if v[1]==U and v[2]==P then
+				CompleteAuto=true
+				break
+			end
+		end
+	end
+end)
+coroutine.resume(aWaitThread)
+
+repeat task.wait(1) until CompleteAuto==true
+coroutine.close(NONThread) coroutine.close(aWaitThread)
+
+--step2
 --Create Gui
 
 local Main=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Main")
@@ -330,6 +517,7 @@ if not Main then
 	Name_2.TextXAlignment = Enum.TextXAlignment.Left
 
 	Player.Name = "Player"
+	Player.ClearTextOnFocus = false
 	Player.Parent = TpPlayer
 	Player.AnchorPoint = Vector2.new(0.5, 0.5)
 	Player.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -390,6 +578,7 @@ if not Main then
 	Name_3.TextXAlignment = Enum.TextXAlignment.Left
 
 	Number.Name = "Number"
+	Number.ClearTextOnFocus = false
 	Number.Parent = Speed
 	Number.AnchorPoint = Vector2.new(0.5, 0.5)
 	Number.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -450,6 +639,7 @@ if not Main then
 	Done1.TextSize = 14.000
 
 	X.Name = "X"
+	X.ClearTextOnFocus = false
 	X.Parent = Tp
 	X.AnchorPoint = Vector2.new(0.5, 1)
 	X.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -464,6 +654,7 @@ if not Main then
 	X.TextSize = 16.000
 
 	Y.Name = "Y"
+	Y.ClearTextOnFocus = false
 	Y.Parent = Tp
 	Y.AnchorPoint = Vector2.new(0.5, 1)
 	Y.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -478,6 +669,7 @@ if not Main then
 	Y.TextSize = 16.000
 
 	Z.Name = "Z"
+	Z.ClearTextOnFocus = false
 	Z.Parent = Tp
 	Z.AnchorPoint = Vector2.new(0.5, 1)
 	Z.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -658,6 +850,7 @@ if not Main then
 	Name_6.TextSize = 14.000
 	Name_6.TextXAlignment = Enum.TextXAlignment.Left
 	
+	---
 	Modal.Name = "Modal"
 	Modal.Text=""
 	Modal.Parent = Cursor
@@ -669,6 +862,7 @@ if not Main then
 	Modal.TextSize = 14.000
 	
 	FOV.Name = "FOV"
+	FOV.ClearTextOnFocus = false
 	FOV.Parent = Aimbot
 	FOV.AnchorPoint = Vector2.new(0.5, 1)
 	FOV.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -696,6 +890,7 @@ if not Main then
 	IconB_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 	IconB_2.TextSize = 14.000
 	
+	---
 	AimBound.Name = "AimBound"
 	AimBound.ResetOnSpawn = false
 	AimBound.DisplayOrder=99
@@ -765,7 +960,10 @@ end
 
 local function setWalkSpeed(Number)
 	if typeof(Number)~="number" then warn("не число") return end
+	
+	if Thread and tonumber(Number)==0 then coroutine.close(Thread) return end
 	if Thread then coroutine.close(Thread) end
+	
 	Thread=coroutine.create(function()
 		while task.wait() do
 			local Hum=nil
@@ -969,6 +1167,3 @@ FOV:GetPropertyChangedSignal("Text"):Connect(function()
 		Circle.Size=UDim2.new(0,tonumber(FOV.Text)*2,0,tonumber(FOV.Text)*2)
 	end
 end)
-
-local TableofUsers=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
-print(TableofUsers)
