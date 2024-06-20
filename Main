@@ -8,11 +8,41 @@ local Exploiter=Players.LocalPlayer
 local Camera=workspace.CurrentCamera
 local Mouse=Exploiter:GetMouse()
 
+local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 --step1
 local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
 --local Library={{Username="admin";Password="admin"}}
 local CompleteAuto=false
 --Create Gui
+local Cursor = Instance.new("ScreenGui")
+Main2 = Instance.new("Frame")
+local CursorM = Instance.new("Frame")
+
+Cursor.Name = "Cursor"
+Cursor.ResetOnSpawn = false
+Cursor.DisplayOrder=101
+Cursor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main2.Name = "Main2"
+Main2.Visible=false
+Main2.Parent = Cursor
+Main2.AnchorPoint = Vector2.new(0, 0)
+Main2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main2.BackgroundTransparency = 1.000
+Main2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main2.BorderSizePixel = 0
+Main2.Position = UDim2.new(0.5, 0, 0.5, 0)
+Main2.Size = UDim2.new(0, 20, 0, 20)
+
+CursorM.Name = "CursorM"
+CursorM.Parent = Main2
+CursorM.AnchorPoint = Vector2.new(0.5, 0.5)
+CursorM.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
+CursorM.BorderSizePixel = 0
+CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
+
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local Name2 = Instance.new("TextLabel")
@@ -30,6 +60,7 @@ local Pass = Instance.new("TextBox")
 local Modal = Instance.new("TextButton")
 
 Instalation.Name = "Instalation"
+Instalation.DisplayOrder = math.huge
 Instalation.ResetOnSpawn = false
 Instalation.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -181,6 +212,12 @@ local NONThread=coroutine.create(function()
 		end
 	end
 end)
+local NONThread2=coroutine.create(function()
+	while task.wait() do
+		Main2.Position=UDim2.new(0,Mouse.X,0,Mouse.Y)
+	end
+end)
+coroutine.resume(NONThread2)
 coroutine.resume(NONThread)
 
 TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
@@ -189,7 +226,6 @@ task.wait(2)
 TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.35, 0,0.5, 0)}):Play()
 task.wait(1)
 TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
-
 local DataModel={User,Pass}
 
 local aWaitThread=coroutine.create(function()
@@ -208,10 +244,11 @@ local aWaitThread=coroutine.create(function()
 	end
 end)
 coroutine.resume(aWaitThread)
-
+Main2.Visible=true
 repeat task.wait(1) until CompleteAuto==true
 coroutine.close(aWaitThread)
-
+Main2.Visible=false
+coroutine.close(NONThread2)
 TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(0,0,0.5,0)}):Play()
 task.wait(1)
 TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5, 0,0.5, 0)}):Play()
@@ -225,37 +262,8 @@ Instalation:Destroy()
 --Create Gui
 
 local Main=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Main")
-local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 
 if not Main then
-	local Cursor = Instance.new("ScreenGui")
-	Main2 = Instance.new("Frame")
-	local CursorM = Instance.new("Frame")
-
-	Cursor.Name = "Cursor"
-	Cursor.ResetOnSpawn = false
-	Cursor.DisplayOrder=101
-	Cursor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-	Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-	Main2.Name = "Main2"
-	Main2.Visible=false
-	Main2.Parent = Cursor
-	Main2.AnchorPoint = Vector2.new(0, 0)
-	Main2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Main2.BackgroundTransparency = 1.000
-	Main2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Main2.BorderSizePixel = 0
-	Main2.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Main2.Size = UDim2.new(0, 20, 0, 20)
-
-	CursorM.Name = "CursorM"
-	CursorM.Parent = Main2
-	CursorM.AnchorPoint = Vector2.new(0.5, 0.5)
-	CursorM.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-	CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	CursorM.BorderSizePixel = 0
-	CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
 	--
 	Main = Instance.new("ScreenGui")
 	MainFrame = Instance.new("Frame")
@@ -401,7 +409,7 @@ if not Main then
 	ver.Position = UDim2.new(0.980000019, 0, 1, 0)
 	ver.Size = UDim2.new(0.200000003, 0, 0.100000001, 0)
 	ver.Font = Enum.Font.Arial
-	ver.Text = "v1.1"
+	ver.Text = "v1.2"
 	ver.TextColor3 = Color3.fromRGB(186, 186, 186)
 	ver.TextSize = 14.000
 	ver.TextTransparency = 0.500
@@ -811,6 +819,7 @@ if not Main then
 	Done4.TextSize = 14.000
 
 	Bind.Name = "Bind"
+	Bind.PlaceholderText = "Бинд"
 	Bind.Parent = Aimbot
 	Bind.AnchorPoint = Vector2.new(0.5, 1)
 	Bind.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -820,7 +829,7 @@ if not Main then
 	Bind.Position = UDim2.new(0.274777204, 0, 0.837965071, 0)
 	Bind.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
 	Bind.Font = Enum.Font.Arial
-	Bind.Text = "C"
+	Bind.Text = "X"
 	Bind.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Bind.TextSize = 16.000
 
@@ -1090,6 +1099,7 @@ local Close=TweenService:Create(MainFrame,TweenInfo.new(.5,Enum.EasingStyle.Sine
 
 Modal.Modal=not Modal.Modal
 Open:Play()
+Main2.Visible=true
 State=not State
 
 UserInputService.InputBegan:Connect(function(input,gpe)
