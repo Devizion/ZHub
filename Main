@@ -1115,6 +1115,7 @@ UserInputService.InputBegan:Connect(function(input,gpe)
 		Main:Destroy()
 		Cursor:Destroy()
 		AimBound:Destroy()
+		destoyESP()
 		script:Destroy()
 	end
 end)
