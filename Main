@@ -10,7 +10,7 @@ local Mouse=Exploiter:GetMouse()
 
 local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 --step1
-local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
+local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibrary/main/Main"))();
 --local Library={{Username="admin";Password="admin"}}
 local CompleteAuto=false
 --Create Gui
