@@ -411,7 +411,7 @@ if not Main then
 	ver.Position = UDim2.new(0.980000019, 0, 1, 0)
 	ver.Size = UDim2.new(0.200000003, 0, 0.100000001, 0)
 	ver.Font = Enum.Font.Arial
-	ver.Text = "v1.2"
+	ver.Text = "v1.3"
 	ver.TextColor3 = Color3.fromRGB(186, 186, 186)
 	ver.TextSize = 14.000
 	ver.TextTransparency = 0.500
