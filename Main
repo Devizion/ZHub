@@ -10,7 +10,7 @@ local Mouse=Exploiter:GetMouse()
 
 local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 --step1
-local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibrary/main/Main"))();
+local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
 --local Library={{Username="admin";Password="admin"}}
 local CompleteAuto=false
 --Create Gui
@@ -220,44 +220,46 @@ end)
 coroutine.resume(NONThread2)
 coroutine.resume(NONThread)
 
-TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
-TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
-task.wait(2)
-TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.35, 0,0.5, 0)}):Play()
-task.wait(1)
-TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
-local DataModel={User,Pass}
+do
+	TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
+	TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
+	task.wait(2)
+	TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.35, 0,0.5, 0)}):Play()
+	task.wait(1)
+	TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
+	local DataModel={User,Pass}
 
-local aWaitThread=coroutine.create(function()
-	for _,Data in DataModel do
-		Data:GetPropertyChangedSignal("Text"):Connect(function()
-			task.wait(1)
-			local U,P=User.Text,Pass.Text
-			for i,v in Library do
-				print(v)
-				if v["Username"]==U and v["Password"]==P then
-					CompleteAuto=true
-					break
+	local aWaitThread=coroutine.create(function()
+		for _,Data in DataModel do
+			Data:GetPropertyChangedSignal("Text"):Connect(function()
+				task.wait(1)
+				local U,P=User.Text,Pass.Text
+				for _,v in Library do
+					if v["Username"]==U and v["Password"]==P then
+						CompleteAuto=true
+						break
+					end
 				end
-			end
-		end)
-	end
-end)
-coroutine.resume(aWaitThread)
-Main2.Visible=true
-repeat task.wait(1) until CompleteAuto==true
-coroutine.close(aWaitThread)
-Main2.Visible=false
-coroutine.close(NONThread2)
-TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(0,0,0.5,0)}):Play()
-task.wait(1)
-TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5, 0,0.5, 0)}):Play()
-task.wait(2)
-TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5,0,1,0)}):Play()
-task.wait(1)
+			end)
+		end
+	end)
+	coroutine.resume(aWaitThread)
+	Main2.Visible=true
 
-coroutine.close(NONThread)
-Instalation:Destroy()
+	repeat task.wait(1) until CompleteAuto==true
+	coroutine.close(aWaitThread)
+
+	Main2.Visible=false
+	coroutine.close(NONThread2)
+	TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(0,0,0.5,0)}):Play()
+	task.wait(1)
+	TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5, 0,0.5, 0)}):Play()
+	task.wait(2)
+	TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
+	task.wait(1.2)
+	coroutine.close(NONThread)
+	Instalation:Destroy()
+end
 --step2
 --Create Gui
 
@@ -951,7 +953,7 @@ if not Main then
 	Circle.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Circle.BorderSizePixel = 0
 	Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Circle.Size = UDim2.new(0, 100, 0, 100)
+	Circle.Size = UDim2.new(0, 200, 0, 200)
 
 	UICorner_9.CornerRadius = UDim.new(1, 0)
 	UICorner_9.Parent = Circle
