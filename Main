@@ -329,7 +329,7 @@ if not Main then
 	Modal = Instance.new("TextButton")
 	local IconB_2 = Instance.new("TextLabel")
 	FOV = Instance.new("TextBox")
-	local AimBound = Instance.new("ScreenGui")
+	AimBound = Instance.new("ScreenGui")
 	Circle = Instance.new("Frame")
 	local UICorner_9 = Instance.new("UICorner")
 	local UIStroke = Instance.new("UIStroke")
@@ -411,7 +411,7 @@ if not Main then
 	ver.Position = UDim2.new(0.980000019, 0, 1, 0)
 	ver.Size = UDim2.new(0.200000003, 0, 0.100000001, 0)
 	ver.Font = Enum.Font.Arial
-	ver.Text = "v1.3"
+	ver.Text = "v1.2"
 	ver.TextColor3 = Color3.fromRGB(186, 186, 186)
 	ver.TextSize = 14.000
 	ver.TextTransparency = 0.500
@@ -1000,6 +1000,7 @@ local BasicMenu=BasicMenu
 local AdvencedMenu=AdvencedMenu
 local Modal=Modal
 local FOV=FOV
+local Aimbound=AimBound
 
 local X,Y,Z=X,Y,Z
 
@@ -1057,7 +1058,7 @@ local function drawESP()
 		while task.wait(.5) do
 			for _,v in Players:GetPlayers() do
 				local Model=v.Character
-				if not Model or Model:FindFirstChild("ESP") or Model==Exploiter.Character then continue end
+				if not Model or Model:FindFirstChild("ESP") or Model==Exploiter.Character or not Model.PrimaryPart then continue end
 
 				local Bild=Instance.new("BillboardGui",Model)
 				local Frame=Instance.new("Frame",Bild)
@@ -1065,7 +1066,7 @@ local function drawESP()
 
 				Bild.Name="ESP"
 				Bild.Size=UDim2.new(4,0,6,0)
-				Bild.Adornee=Model
+				Bild.Adornee=Model.PrimaryPart
 				Bild.AlwaysOnTop=true
 
 				Frame.BackgroundTransparency=1
@@ -1089,7 +1090,7 @@ local function destoyESP()
 	
 	for _,v in Players:GetPlayers() do
 		local Model=v.Character
-		if not Model or not Model:FindFirstChild("ESP") then continue end
+		if not Model or not Model:FindFirstChild("ESP") or not Model.PrimaryPart then continue end
 
 		Model.ESP:Destroy()
 	end
@@ -1112,6 +1113,8 @@ UserInputService.InputBegan:Connect(function(input,gpe)
 		State=not State
 	elseif int==Enum.KeyCode.Delete and not gpe then
 		Main:Destroy()
+		Cursor:Destroy()
+		AimBound:Destroy()
 		script:Destroy()
 	end
 end)
