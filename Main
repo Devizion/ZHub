@@ -1019,15 +1019,26 @@ local ESPstate=true
 
 local tab={}
 
+local function tryFindPlr(Needs)
+	Needs=string.lower(Needs)
+	local TableOfNames=Players:GetPlayers()
+	
+	for _,v in TableOfNames do
+		local Name_a=string.lower(v.Name)
+		if string.match(Name_a,Needs) then
+			return v
+		end
+	end
+end
+
 local function tpPos(X,Y,Z)
 	if typeof(X or Y or Z)~="number" then warn("не число") return end
 	Exploiter.Character.PrimaryPart.CFrame=Exploiter.Character.PrimaryPart.CFrame*CFrame.new(X,Y,Z)
 end
 
 local function tpPlayer(PlayerName)
-	if not Players:FindFirstChild(PlayerName) then warn("не нашёл игрока") return end
-	local NowPlayer=Players:FindFirstChild(PlayerName)
-
+	local NowPlayer=tryFindPlr(PlayerName)
+	if not NowPlayer then warn("не нашёл игрока") return end
 	local Chr=NowPlayer.Character or NowPlayer.CharacterAdded:Wait()
 
 	if Chr and Chr.PrimaryPart then
@@ -1111,7 +1122,7 @@ UserInputService.InputBegan:Connect(function(input,gpe)
 		Modal.Modal=not Modal.Modal
 		if State then Open:Play() Main2.Visible=true else Close:Play() Main2.Visible=false end
 		State=not State
-	elseif int==Enum.KeyCode.Delete and not gpe then
+	elseif int==Enum.KeyCode.PageDown and not gpe then
 		Main:Destroy()
 		Cursor:Destroy()
 		AimBound:Destroy()
