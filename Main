@@ -21,7 +21,7 @@ local CursorM = Instance.new("Frame")
 Cursor.Name = "Cursor"
 Cursor.ResetOnSpawn = false
 Cursor.DisplayOrder=101
-Cursor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Cursor.Parent = Exploiter:WaitForChild("PlayerGui")
 Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main2.Name = "Main2"
@@ -62,7 +62,7 @@ local Modal = Instance.new("TextButton")
 Instalation.Name = "Instalation"
 Instalation.DisplayOrder = math.huge
 Instalation.ResetOnSpawn = false
-Instalation.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Instalation.Parent = Exploiter:WaitForChild("PlayerGui")
 Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main.Name = "Main"
@@ -340,7 +340,7 @@ if not Main then
 
 	Main.Name = "Main"
 	Main.DisplayOrder=100
-	Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	Main.Parent = Exploiter:WaitForChild("PlayerGui")
 	Main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Main.ResetOnSpawn = false
 
@@ -941,7 +941,7 @@ if not Main then
 	AimBound.Name = "AimBound"
 	AimBound.ResetOnSpawn = false
 	AimBound.DisplayOrder=99
-	AimBound.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
 	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	Circle.Name = "Circle"
