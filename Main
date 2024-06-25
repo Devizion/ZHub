@@ -42,7 +42,9 @@ CursorM.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
 CursorM.BorderSizePixel = 0
 CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
-print("Create Inst")
+
+task.wait()
+
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local Name2 = Instance.new("TextLabel")
