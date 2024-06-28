@@ -872,6 +872,7 @@ if not Main then
 	
 	AimBound.Name = "AimBound"
 	AimBound.ResetOnSpawn = false
+	AimBound.DisplayOrder = 99
 	AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
 	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -884,7 +885,7 @@ if not Main then
 	Circle.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Circle.BorderSizePixel = 0
 	Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Circle.Size = UDim2.new(0, 100, 0, 100)
+	Circle.Size = UDim2.new(0, 400, 0, 400)
 
 	UICorner_11.CornerRadius = UDim.new(1, 0)
 	UICorner_11.Parent = Circle
