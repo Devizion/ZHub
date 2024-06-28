@@ -1,6 +1,7 @@
 --Serives
 local Players=game:GetService("Players")
 local UserInputService=game:GetService("UserInputService")
+local HttpService=game:GetService("HttpService")
 local TweenService=game:GetService("TweenService")
 local RunService=game:GetService("RunService")
 --Const
@@ -10,9 +11,55 @@ local Mouse=Exploiter:GetMouse()
 
 local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 --step1
-local Library=loadstring(game:HttpGet("https://raw.githubusercontent.com/Devizion/ZHubLibraly/main/Main"))();
---local Library={{Username="admin";Password="admin"}}
 local CompleteAuto=false
+do
+	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
+
+	local dir=path..".json"
+	local reqTotal
+
+	local request={}
+	request.Url=dir
+	request.Method="GET"
+
+	reqTotal=HttpService:RequestAsync(request)
+	local SearchTable=HttpService:JSONDecode(reqTotal.Body)
+	for i,v in SearchTable do
+		if v==nil then
+			table.remove(SearchTable,i)
+		end
+	end
+	
+	local ToDeleteKey
+	for i,v in SearchTable do
+		if v and typeof(v)=="table" and v["Time"]+v["Time_Of_Buy"]<os.time() then
+			ToDeleteKey=i-1
+		end
+	end
+
+	if ToDeleteKey then
+		local dir=path.."/"..tostring(ToDeleteKey)..".json"
+		local request={}
+		request.Url=dir
+		request.Method="DELETE"
+		request.Headers = {}
+		request.Headers["Content-Type"] = "application/x-www-form-urlencoded"
+		request.Body=HttpService:JSONEncode("")
+
+		reqTotal=HttpService:RequestAsync(request)
+	end
+	
+	for _,v in SearchTable do
+		if v["UID"]==Exploiter.UserId then
+			CompleteAuto=true
+		end
+	end
+	if CompleteAuto==false then
+		while true do
+			if true then else end
+		end
+	end
+end
 --Create Gui
 local Cursor = Instance.new("ScreenGui")
 Main2 = Instance.new("Frame")
@@ -43,28 +90,15 @@ CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
 CursorM.BorderSizePixel = 0
 CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
 
-task.wait()
-
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local Name2 = Instance.new("TextLabel")
 local UIGradient = Instance.new("UIGradient")
-local Place = Instance.new("Frame")
-local Autorize = Instance.new("Frame")
-local UIGradient_2 = Instance.new("UIGradient")
-local UICorner = Instance.new("UICorner")
-local Stroke = Instance.new("Frame")
-local Data = Instance.new("Folder")
-local Username = Instance.new("Frame")
-local User = Instance.new("TextBox")
-local Password = Instance.new("Frame")
-local Pass = Instance.new("TextBox")
-local Modal = Instance.new("TextButton")
 
 Instalation.Name = "Instalation"
-Instalation.DisplayOrder = math.huge
 Instalation.ResetOnSpawn = false
-Instalation.Parent = Exploiter:WaitForChild("PlayerGui")
+Instalation.DisplayOrder = math.huge
+Instalation.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main.Name = "Main"
@@ -77,17 +111,6 @@ Main.BorderSizePixel = 0
 Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Size = UDim2.new(1, 0, 1, 0)
 Main.SizeConstraint = Enum.SizeConstraint.RelativeXX
-
-Modal.Name = "Modal"
-Modal.Text=""
-Modal.Modal = true
-Modal.Parent = Instalation
-Modal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Modal.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Modal.BorderSizePixel = 0
-Modal.Font = Enum.Font.SourceSans
-Modal.TextColor3 = Color3.fromRGB(0, 0, 0)
-Modal.TextSize = 14.000
 
 Name2.Name = "Name2"
 Name2.Parent = Main
@@ -104,107 +127,11 @@ Name2.TextColor3 = Color3.fromRGB(186, 130, 41)
 Name2.TextScaled = true
 Name2.TextSize = 100.000
 Name2.TextWrapped = true
-Name2.TextXAlignment = Enum.TextXAlignment.Left
 
 UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(198, 152, 51)), ColorSequenceKeypoint.new(0.92, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
 UIGradient.Rotation = 180
 UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.55, 0.00), NumberSequenceKeypoint.new(1.00, 0.00)}
 UIGradient.Parent = Name2
-
-Place.Name = "Place"
-Place.Parent = Main
-Place.AnchorPoint = Vector2.new(0, 0.5)
-Place.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Place.BackgroundTransparency = 1.000
-Place.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Place.BorderSizePixel = 0
-Place.ClipsDescendants = true
-Place.Position = UDim2.new(0.375, 0, 0.5, 0)
-Place.Size = UDim2.new(0.300000012, 0, 0.0799999982, 0)
-
-Autorize.Name = "Autorize"
-Autorize.Parent = Place
-Autorize.AnchorPoint = Vector2.new(1, 0.5)
-Autorize.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
-Autorize.BackgroundTransparency = 0.200
-Autorize.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Autorize.BorderSizePixel = 0
-Autorize.ClipsDescendants = true
-Autorize.Position = UDim2.new(0, 0, 0.5, 0)
-Autorize.Size = UDim2.new(1, 0, 1, 0)
-
-UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 146, 83)), ColorSequenceKeypoint.new(0.42, Color3.fromRGB(255, 146, 83)), ColorSequenceKeypoint.new(0.92, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-UIGradient_2.Offset = Vector2.new(-0.400000006, 0)
-UIGradient_2.Rotation = 59
-UIGradient_2.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.55, 0.00), NumberSequenceKeypoint.new(1.00, 0.00)}
-UIGradient_2.Parent = Autorize
-
-UICorner.Parent = Autorize
-
-Stroke.Name = "Stroke"
-Stroke.Parent = Autorize
-Stroke.AnchorPoint = Vector2.new(0, 0.5)
-Stroke.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
-Stroke.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Stroke.BorderSizePixel = 0
-Stroke.Position = UDim2.new(0.0250000004, 0, 0.5, 0)
-Stroke.Size = UDim2.new(0.00999999978, 0, 0.800000012, 0)
-
-Data.Name = "Data"
-Data.Parent = Autorize
-
-Username.Name = "Username"
-Username.Parent = Data
-Username.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-Username.BackgroundTransparency = 0.500
-Username.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Username.BorderSizePixel = 0
-Username.Position = UDim2.new(0.100000001, 0, 0.100000001, 0)
-Username.Size = UDim2.new(0.800000012, 0, 0.349999994, 0)
-
-User.Name = "User"
-User.Parent = Username
-User.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-User.BackgroundTransparency = 1.000
-User.BorderColor3 = Color3.fromRGB(0, 0, 0)
-User.BorderSizePixel = 0
-User.Position = UDim2.new(0.0199999996, 0, 0, 0)
-User.Size = UDim2.new(0.899999976, 0, 1, 0)
-User.ClearTextOnFocus = false
-User.Font = Enum.Font.Arial
-User.PlaceholderColor3 = Color3.fromRGB(121, 121, 121)
-User.PlaceholderText = "Username"
-User.Text = ""
-User.TextColor3 = Color3.fromRGB(255, 255, 255)
-User.TextSize = 14.000
-User.TextXAlignment = Enum.TextXAlignment.Left
-
-Password.Name = "Password"
-Password.Parent = Data
-Password.AnchorPoint = Vector2.new(0, 1)
-Password.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-Password.BackgroundTransparency = 0.500
-Password.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Password.BorderSizePixel = 0
-Password.Position = UDim2.new(0.100000001, 0, 0.899999976, 0)
-Password.Size = UDim2.new(0.800000012, 0, 0.349999994, 0)
-
-Pass.Name = "Pass"
-Pass.Parent = Password
-Pass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Pass.BackgroundTransparency = 1.000
-Pass.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Pass.BorderSizePixel = 0
-Pass.Position = UDim2.new(0.0199999996, 0, 0, 0)
-Pass.Size = UDim2.new(0.899999976, 0, 1, 0)
-Pass.ClearTextOnFocus = false
-Pass.Font = Enum.Font.Arial
-Pass.PlaceholderColor3 = Color3.fromRGB(121, 121, 121)
-Pass.PlaceholderText = "Password"
-Pass.Text = ""
-Pass.TextColor3 = Color3.fromRGB(255, 255, 255)
-Pass.TextSize = 14.000
-Pass.TextXAlignment = Enum.TextXAlignment.Left
 
 local NONThread=coroutine.create(function()
 	while task.wait() do
@@ -214,49 +141,13 @@ local NONThread=coroutine.create(function()
 		end
 	end
 end)
-local NONThread2=coroutine.create(function()
-	while task.wait() do
-		Main2.Position=UDim2.new(0,Mouse.X,0,Mouse.Y)
-	end
-end)
-coroutine.resume(NONThread2)
+
 coroutine.resume(NONThread)
 
 do
 	TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
 	TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
-	task.wait(2)
-	TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.35, 0,0.5, 0)}):Play()
-	task.wait(1)
-	TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(1,0,0.5,0)}):Play()
-	local DataModel={User,Pass}
-
-	local aWaitThread=coroutine.create(function()
-		for _,Data in DataModel do
-			Data:GetPropertyChangedSignal("Text"):Connect(function()
-				task.wait(1)
-				local U,P=User.Text,Pass.Text
-				for _,v in Library do
-					if v["Username"]==U and v["Password"]==P then
-						CompleteAuto=true
-						break
-					end
-				end
-			end)
-		end
-	end)
-	coroutine.resume(aWaitThread)
-	Main2.Visible=true
-
-	repeat task.wait(1) until CompleteAuto==true
-	coroutine.close(aWaitThread)
-
-	Main2.Visible=false
-	coroutine.close(NONThread2)
-	TweenService:Create(Autorize,TweenInfo.new(1),{Position=UDim2.new(0,0,0.5,0)}):Play()
-	task.wait(1)
-	TweenService:Create(Name2,TweenInfo.new(1),{Position=UDim2.new(0.5, 0,0.5, 0)}):Play()
-	task.wait(2)
+	task.wait(4)
 	TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
 	task.wait(1.2)
 	coroutine.close(NONThread)
@@ -337,8 +228,6 @@ if not Main then
 	local UIStroke = Instance.new("UIStroke")
 	local IconB_3 = Instance.new("TextLabel")
 	Done6 = Instance.new("TextButton")
-
-	--Properties:
 
 	Main.Name = "Main"
 	Main.DisplayOrder=100
