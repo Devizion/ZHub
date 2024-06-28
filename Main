@@ -15,17 +15,42 @@ local CompleteAuto=false
 do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
-    local reqTotal=game:HttpGet(path..".json")
+	local dir=path..".json"
+	local reqTotal
 
-	local SearchTable=HttpService:JSONDecode(reqTotal)
+	local request={}
+	request.Url=dir
+	request.Method="GET"
+
+	reqTotal=HttpService:RequestAsync(request)
+	local SearchTable=HttpService:JSONDecode(reqTotal.Body)
 	for i,v in SearchTable do
 		if v==nil then
 			table.remove(SearchTable,i)
 		end
 	end
 	
+	local ToDeleteKey
+	for i,v in SearchTable do
+		if v and typeof(v)=="table" and v["Time"]+v["Time_Of_Buy"]<os.time() then
+			ToDeleteKey=i-1
+		end
+	end
+
+	if ToDeleteKey then
+		local dir=path.."/"..tostring(ToDeleteKey)..".json"
+		local request={}
+		request.Url=dir
+		request.Method="DELETE"
+		request.Headers = {}
+		request.Headers["Content-Type"] = "application/x-www-form-urlencoded"
+		request.Body=HttpService:JSONEncode("")
+
+		reqTotal=HttpService:RequestAsync(request)
+	end
+	
 	for _,v in SearchTable do
-		if typeof(v)=="table" and v["UID"]==Exploiter.UserId then
+		if v["UID"]==Exploiter.UserId then
 			CompleteAuto=true
 		end
 	end
@@ -36,35 +61,6 @@ do
 	end
 end
 --Create Gui
-local Cursor = Instance.new("ScreenGui")
-Main2 = Instance.new("Frame")
-local CursorM = Instance.new("Frame")
-
-Cursor.Name = "Cursor"
-Cursor.ResetOnSpawn = false
-Cursor.DisplayOrder=101
-Cursor.Parent = Exploiter:WaitForChild("PlayerGui")
-Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-Main2.Name = "Main2"
-Main2.Visible=false
-Main2.Parent = Cursor
-Main2.AnchorPoint = Vector2.new(0, 0)
-Main2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Main2.BackgroundTransparency = 1.000
-Main2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Main2.BorderSizePixel = 0
-Main2.Position = UDim2.new(0.5, 0, 0.5, 0)
-Main2.Size = UDim2.new(0, 20, 0, 20)
-
-CursorM.Name = "CursorM"
-CursorM.Parent = Main2
-CursorM.AnchorPoint = Vector2.new(0.5, 0.5)
-CursorM.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
-CursorM.BorderSizePixel = 0
-CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
-
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local Name2 = Instance.new("TextLabel")
@@ -120,10 +116,10 @@ end)
 coroutine.resume(NONThread)
 
 do
-	TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
+	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
 	TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
 	task.wait(4)
-	TweenService:Create(Name2,TweenInfo.new(1,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
+	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
 	task.wait(1.2)
 	coroutine.close(NONThread)
 	Instalation:Destroy()
@@ -134,7 +130,6 @@ end
 local Main=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Main")
 
 if not Main then
-	--
 	Main = Instance.new("ScreenGui")
 	MainFrame = Instance.new("Frame")
 	local UIGradient = Instance.new("UIGradient")
@@ -156,24 +151,27 @@ if not Main then
 	BasicMenu = Instance.new("TextButton")
 	local UICorner_3 = Instance.new("UICorner")
 	local UIGradient_5 = Instance.new("UIGradient")
+	NewMenu = Instance.new("TextButton")
+	local UICorner_4 = Instance.new("UICorner")
+	local UIGradient_6 = Instance.new("UIGradient")
 	local Menus = Instance.new("Folder")
 	local BasicMenu_2 = Instance.new("Folder")
 	local TpPlayer = Instance.new("Frame")
-	local UICorner_4 = Instance.new("UICorner")
-	local UIGradient_6 = Instance.new("UIGradient")
+	local UICorner_5 = Instance.new("UICorner")
+	local UIGradient_7 = Instance.new("UIGradient")
 	Done2 = Instance.new("TextButton")
 	local Name_2 = Instance.new("TextLabel")
 	Player = Instance.new("TextBox")
 	local Speed = Instance.new("Frame")
-	local UIGradient_7 = Instance.new("UIGradient")
-	local UICorner_5 = Instance.new("UICorner")
+	local UIGradient_8 = Instance.new("UIGradient")
+	local UICorner_6 = Instance.new("UICorner")
 	Done3 = Instance.new("TextButton")
 	local Name_3 = Instance.new("TextLabel")
 	Number = Instance.new("TextBox")
 	local Tp = Instance.new("Frame")
 	local Name_4 = Instance.new("TextLabel")
-	local UICorner_6 = Instance.new("UICorner")
-	local UIGradient_8 = Instance.new("UIGradient")
+	local UICorner_7 = Instance.new("UICorner")
+	local UIGradient_9 = Instance.new("UIGradient")
 	Done1 = Instance.new("TextButton")
 	X = Instance.new("TextBox")
 	Y = Instance.new("TextBox")
@@ -184,29 +182,36 @@ if not Main then
 	local AdvencedMenu_2 = Instance.new("Folder")
 	local Aimbot = Instance.new("Frame")
 	local Name_5 = Instance.new("TextLabel")
-	local UICorner_7 = Instance.new("UICorner")
-	local UIGradient_9 = Instance.new("UIGradient")
-	local Bind = Instance.new("TextBox")
-	local IconB = Instance.new("TextLabel")
-	Done4 = Instance.new("TextButton")
-	local Wallhack = Instance.new("Frame")
 	local UICorner_8 = Instance.new("UICorner")
 	local UIGradient_10 = Instance.new("UIGradient")
-	Done5 = Instance.new("TextButton")
-	local Name_6 = Instance.new("TextLabel")
-	Modal = Instance.new("TextButton")
+	Done4 = Instance.new("TextButton")
+	local Bind = Instance.new("TextBox")
+	local IconB = Instance.new("TextLabel")
 	local IconB_2 = Instance.new("TextLabel")
 	FOV = Instance.new("TextBox")
-	AimBound = Instance.new("ScreenGui")
-	Circle = Instance.new("Frame")
-	local UICorner_9 = Instance.new("UICorner")
-	local UIStroke = Instance.new("UIStroke")
 	local IconB_3 = Instance.new("TextLabel")
 	Done6 = Instance.new("TextButton")
+	local Wallhack = Instance.new("Frame")
+	local UICorner_9 = Instance.new("UICorner")
+	local UIGradient_11 = Instance.new("UIGradient")
+	Done5 = Instance.new("TextButton")
+	local Name_6 = Instance.new("TextLabel")
+	local NewMenu_2 = Instance.new("Folder")
+	local ToolCrash = Instance.new("Frame")
+	local Name_7 = Instance.new("TextLabel")
+	local UICorner_10 = Instance.new("UICorner")
+	local UIGradient_12 = Instance.new("UIGradient")
+	Done7 = Instance.new("TextButton")
+	AimBound = Instance.new("ScreenGui")
+	Circle = Instance.new("Frame")
+	local UICorner_11 = Instance.new("UICorner")
+	local Cursor = Instance.new("ScreenGui")
+	Main2 = Instance.new("Frame")
+	local CursorM = Instance.new("Frame")
+	Modal = Instance.new("TextButton")
 
 	Main.Name = "Main"
-	Main.DisplayOrder=100
-	Main.Parent = Exploiter:WaitForChild("PlayerGui")
+	Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	Main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Main.ResetOnSpawn = false
 
@@ -277,7 +282,7 @@ if not Main then
 	ver.Position = UDim2.new(0.980000019, 0, 1, 0)
 	ver.Size = UDim2.new(0.200000003, 0, 0.100000001, 0)
 	ver.Font = Enum.Font.Arial
-	ver.Text = "v1.2"
+	ver.Text = "v1.5"
 	ver.TextColor3 = Color3.fromRGB(186, 186, 186)
 	ver.TextSize = 14.000
 	ver.TextTransparency = 0.500
@@ -370,6 +375,27 @@ if not Main then
 	UIGradient_5.Rotation = 2
 	UIGradient_5.Parent = BasicMenu
 
+	NewMenu.Name = "NewMenu"
+	NewMenu.Parent = ScrollingFrame
+	NewMenu.AnchorPoint = Vector2.new(0.5, 0)
+	NewMenu.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	NewMenu.BackgroundTransparency = 0.200
+	NewMenu.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	NewMenu.BorderSizePixel = 0
+	NewMenu.Position = UDim2.new(0.5, 0, 0.224999994, 0)
+	NewMenu.Size = UDim2.new(1, 0, 0.075000003, 0)
+	NewMenu.Font = Enum.Font.Arial
+	NewMenu.Text = "Особые функции"
+	NewMenu.TextColor3 = Color3.fromRGB(255, 255, 255)
+	NewMenu.TextSize = 18.000
+
+	UICorner_4.Parent = NewMenu
+
+	UIGradient_6.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_6.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_6.Rotation = 2
+	UIGradient_6.Parent = NewMenu
+
 	Menus.Name = "Menus"
 	Menus.Parent = MainFrame
 
@@ -386,12 +412,12 @@ if not Main then
 	TpPlayer.Position = UDim2.new(0.949999988, 0, 0.529999971, 0)
 	TpPlayer.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
 
-	UICorner_4.Parent = TpPlayer
+	UICorner_5.Parent = TpPlayer
 
-	UIGradient_6.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-	UIGradient_6.Offset = Vector2.new(-0.100000001, 0)
-	UIGradient_6.Rotation = 2
-	UIGradient_6.Parent = TpPlayer
+	UIGradient_7.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_7.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_7.Rotation = 2
+	UIGradient_7.Parent = TpPlayer
 
 	Done2.Name = "Done2"
 	Done2.Parent = TpPlayer
@@ -423,9 +449,6 @@ if not Main then
 	Name_2.TextXAlignment = Enum.TextXAlignment.Left
 
 	Player.Name = "Player"
-	Player.Text = ""
-	Player.PlaceholderText = "Имя игрока"
-	Player.ClearTextOnFocus = false
 	Player.Parent = TpPlayer
 	Player.AnchorPoint = Vector2.new(0.5, 0.5)
 	Player.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -434,7 +457,9 @@ if not Main then
 	Player.BorderSizePixel = 0
 	Player.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Player.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Player.ClearTextOnFocus = false
 	Player.Font = Enum.Font.Arial
+	Player.Text = "Имя игрока"
 	Player.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Player.TextSize = 16.000
 
@@ -448,12 +473,12 @@ if not Main then
 	Speed.Position = UDim2.new(0.949999988, 0, 0.800000012, 0)
 	Speed.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
 
-	UIGradient_7.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-	UIGradient_7.Offset = Vector2.new(-0.100000001, 0)
-	UIGradient_7.Rotation = 2
-	UIGradient_7.Parent = Speed
+	UIGradient_8.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_8.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_8.Rotation = 2
+	UIGradient_8.Parent = Speed
 
-	UICorner_5.Parent = Speed
+	UICorner_6.Parent = Speed
 
 	Done3.Name = "Done3"
 	Done3.Parent = Speed
@@ -485,7 +510,6 @@ if not Main then
 	Name_3.TextXAlignment = Enum.TextXAlignment.Left
 
 	Number.Name = "Number"
-	Number.ClearTextOnFocus = false
 	Number.Parent = Speed
 	Number.AnchorPoint = Vector2.new(0.5, 0.5)
 	Number.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -494,9 +518,9 @@ if not Main then
 	Number.BorderSizePixel = 0
 	Number.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Number.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Number.ClearTextOnFocus = false
 	Number.Font = Enum.Font.Arial
-	Number.PlaceholderText = "Число"
-	Number.Text = ""
+	Number.Text = "Число"
 	Number.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Number.TextSize = 16.000
 
@@ -525,12 +549,12 @@ if not Main then
 	Name_4.TextSize = 14.000
 	Name_4.TextXAlignment = Enum.TextXAlignment.Left
 
-	UICorner_6.Parent = Tp
+	UICorner_7.Parent = Tp
 
-	UIGradient_8.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-	UIGradient_8.Offset = Vector2.new(-0.100000001, 0)
-	UIGradient_8.Rotation = 2
-	UIGradient_8.Parent = Tp
+	UIGradient_9.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_9.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_9.Rotation = 2
+	UIGradient_9.Parent = Tp
 
 	Done1.Name = "Done1"
 	Done1.Parent = Tp
@@ -547,7 +571,6 @@ if not Main then
 	Done1.TextSize = 14.000
 
 	X.Name = "X"
-	X.ClearTextOnFocus = false
 	X.Parent = Tp
 	X.AnchorPoint = Vector2.new(0.5, 1)
 	X.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -556,14 +579,14 @@ if not Main then
 	X.BorderSizePixel = 0
 	X.Position = UDim2.new(0.274777204, 0, 0.837965071, 0)
 	X.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	X.ClearTextOnFocus = false
 	X.Font = Enum.Font.Arial
-	X.Text = "0"
 	X.PlaceholderText = "0"
+	X.Text = "0"
 	X.TextColor3 = Color3.fromRGB(255, 255, 255)
 	X.TextSize = 16.000
 
 	Y.Name = "Y"
-	Y.ClearTextOnFocus = false
 	Y.Parent = Tp
 	Y.AnchorPoint = Vector2.new(0.5, 1)
 	Y.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -572,14 +595,14 @@ if not Main then
 	Y.BorderSizePixel = 0
 	Y.Position = UDim2.new(0.499777138, 0, 0.837965071, 0)
 	Y.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Y.ClearTextOnFocus = false
 	Y.Font = Enum.Font.Arial
-	Y.Text = "0"
 	Y.PlaceholderText = "0"
+	Y.Text = "0"
 	Y.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Y.TextSize = 16.000
 
 	Z.Name = "Z"
-	Z.ClearTextOnFocus = false
 	Z.Parent = Tp
 	Z.AnchorPoint = Vector2.new(0.5, 1)
 	Z.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -588,9 +611,10 @@ if not Main then
 	Z.BorderSizePixel = 0
 	Z.Position = UDim2.new(0.723419309, 0, 0.837965071, 0)
 	Z.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	Z.ClearTextOnFocus = false
 	Z.Font = Enum.Font.Arial
+	Z.PlaceholderText = "0"
 	Z.Text = "0"
-	Z.PlaceholderText = "Z"
 	Z.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Z.TextSize = 16.000
 
@@ -665,12 +689,12 @@ if not Main then
 	Name_5.TextSize = 14.000
 	Name_5.TextXAlignment = Enum.TextXAlignment.Left
 
-	UICorner_7.Parent = Aimbot
+	UICorner_8.Parent = Aimbot
 
-	UIGradient_9.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-	UIGradient_9.Offset = Vector2.new(-0.100000001, 0)
-	UIGradient_9.Rotation = 2
-	UIGradient_9.Parent = Aimbot
+	UIGradient_10.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_10.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_10.Rotation = 2
+	UIGradient_10.Parent = Aimbot
 
 	Done4.Name = "Done4"
 	Done4.Parent = Aimbot
@@ -687,7 +711,6 @@ if not Main then
 	Done4.TextSize = 14.000
 
 	Bind.Name = "Bind"
-	Bind.PlaceholderText = "Бинд"
 	Bind.Parent = Aimbot
 	Bind.AnchorPoint = Vector2.new(0.5, 1)
 	Bind.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -697,7 +720,7 @@ if not Main then
 	Bind.Position = UDim2.new(0.274777204, 0, 0.837965071, 0)
 	Bind.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
 	Bind.Font = Enum.Font.Arial
-	Bind.Text = "X"
+	Bind.Text = "C"
 	Bind.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Bind.TextSize = 16.000
 
@@ -715,8 +738,64 @@ if not Main then
 	IconB.TextColor3 = Color3.fromRGB(255, 255, 255)
 	IconB.TextSize = 14.000
 
+	IconB_2.Name = "IconB"
+	IconB_2.Parent = Aimbot
+	IconB_2.AnchorPoint = Vector2.new(0.5, 1)
+	IconB_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_2.BackgroundTransparency = 1.000
+	IconB_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IconB_2.BorderSizePixel = 0
+	IconB_2.Position = UDim2.new(0.498871505, 0, 0.437965214, 0)
+	IconB_2.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	IconB_2.Font = Enum.Font.Arial
+	IconB_2.Text = "Фов"
+	IconB_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_2.TextSize = 14.000
+
+	FOV.Name = "FOV"
+	FOV.Parent = Aimbot
+	FOV.AnchorPoint = Vector2.new(0.5, 1)
+	FOV.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	FOV.BackgroundTransparency = 1.000
+	FOV.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	FOV.BorderSizePixel = 0
+	FOV.Position = UDim2.new(0.499777138, 0, 0.837965071, 0)
+	FOV.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	FOV.ClearTextOnFocus = false
+	FOV.Font = Enum.Font.Arial
+	FOV.Text = "50"
+	FOV.TextColor3 = Color3.fromRGB(255, 255, 255)
+	FOV.TextSize = 16.000
+
+	IconB_3.Name = "IconB"
+	IconB_3.Parent = Aimbot
+	IconB_3.AnchorPoint = Vector2.new(0.5, 1)
+	IconB_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_3.BackgroundTransparency = 1.000
+	IconB_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IconB_3.BorderSizePixel = 0
+	IconB_3.Position = UDim2.new(0.722513676, 0, 0.437965214, 0)
+	IconB_3.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
+	IconB_3.Font = Enum.Font.Arial
+	IconB_3.Text = "Вкл фов рендер"
+	IconB_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+	IconB_3.TextSize = 14.000
+
+	Done6.Name = "Done6"
+	Done6.Parent = Aimbot
+	Done6.AnchorPoint = Vector2.new(0.5, 1)
+	Done6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done6.BackgroundTransparency = 1.000
+	Done6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done6.BorderSizePixel = 0
+	Done6.Position = UDim2.new(0.72299999, 0, 1, 0)
+	Done6.Size = UDim2.new(0.100000001, 0, 0.699999988, 0)
+	Done6.Font = Enum.Font.Arial
+	Done6.Text = "Вкл"
+	Done6.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done6.TextSize = 14.000
+
 	Wallhack.Name = "Wallhack"
-	Wallhack.Visible=false
 	Wallhack.Parent = AdvencedMenu_2
 	Wallhack.AnchorPoint = Vector2.new(1, 0.5)
 	Wallhack.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
@@ -725,13 +804,14 @@ if not Main then
 	Wallhack.BorderSizePixel = 0
 	Wallhack.Position = UDim2.new(0.949999988, 0, 0.529999971, 0)
 	Wallhack.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+	Wallhack.Visible = false
 
-	UICorner_8.Parent = Wallhack
+	UICorner_9.Parent = Wallhack
 
-	UIGradient_10.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
-	UIGradient_10.Offset = Vector2.new(-0.100000001, 0)
-	UIGradient_10.Rotation = 2
-	UIGradient_10.Parent = Wallhack
+	UIGradient_11.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_11.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_11.Rotation = 2
+	UIGradient_11.Parent = Wallhack
 
 	Done5.Name = "Done5"
 	Done5.Parent = Wallhack
@@ -761,8 +841,99 @@ if not Main then
 	Name_6.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Name_6.TextSize = 14.000
 	Name_6.TextXAlignment = Enum.TextXAlignment.Left
+
+	NewMenu_2.Name = "NewMenu"
+	NewMenu_2.Parent = Menus
+
+	ToolCrash.Name = "ToolCrash"
+	ToolCrash.Parent = NewMenu_2
+	ToolCrash.AnchorPoint = Vector2.new(1, 0.5)
+	ToolCrash.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+	ToolCrash.BackgroundTransparency = 0.200
+	ToolCrash.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ToolCrash.BorderSizePixel = 0
+	ToolCrash.Position = UDim2.new(0.949999988, 0, 0.25999999, 0)
+	ToolCrash.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+	ToolCrash.Visible = false
+
+	Name_7.Name = "Name"
+	Name_7.Parent = ToolCrash
+	Name_7.AnchorPoint = Vector2.new(0, 0.5)
+	Name_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_7.BackgroundTransparency = 1.000
+	Name_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name_7.BorderSizePixel = 0
+	Name_7.Position = UDim2.new(0.00999998488, 0, 0.50000006, 0)
+	Name_7.Size = UDim2.new(0.150000006, 0, 0.800000012, 0)
+	Name_7.Font = Enum.Font.Arial
+	Name_7.Text = "Тул краш"
+	Name_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Name_7.TextSize = 14.000
+	Name_7.TextXAlignment = Enum.TextXAlignment.Left
+
+	UICorner_10.Parent = ToolCrash
+
+	UIGradient_12.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+	UIGradient_12.Offset = Vector2.new(-0.100000001, 0)
+	UIGradient_12.Rotation = 2
+	UIGradient_12.Parent = ToolCrash
+
+	Done7.Name = "Done7"
+	Done7.Parent = ToolCrash
+	Done7.AnchorPoint = Vector2.new(1, 0.5)
+	Done7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Done7.BackgroundTransparency = 1.000
+	Done7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Done7.BorderSizePixel = 0
+	Done7.Position = UDim2.new(1, 0, 0.5, 0)
+	Done7.Size = UDim2.new(0.100000001, 0, 0.800000012, 0)
+	Done7.Font = Enum.Font.Arial
+	Done7.Text = "Вкл"
+	Done7.TextColor3 = Color3.fromRGB(68, 211, 46)
+	Done7.TextSize = 14.000
 	
-	---
+	AimBound.Name = "AimBound"
+	AimBound.Parent = game.ServerStorage
+	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Circle.Name = "Circle"
+	Circle.Parent = AimBound
+	Circle.AnchorPoint = Vector2.new(0.5, 0.5)
+	Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Circle.BackgroundTransparency = 1.000
+	Circle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Circle.BorderSizePixel = 0
+	Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Circle.Size = UDim2.new(0, 100, 0, 100)
+
+	UICorner_11.CornerRadius = UDim.new(1, 0)
+	UICorner_11.Parent = Circle
+	
+	Cursor.Name = "Cursor"
+	Cursor.ResetOnSpawn = false
+	Cursor.DisplayOrder=101
+	Cursor.Parent = Exploiter:WaitForChild("PlayerGui")
+	Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Main2.Name = "Main2"
+	Main2.Visible=false
+	Main2.Parent = Cursor
+	Main2.AnchorPoint = Vector2.new(0, 0)
+	Main2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Main2.BackgroundTransparency = 1.000
+	Main2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Main2.BorderSizePixel = 0
+	Main2.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main2.Size = UDim2.new(0, 20, 0, 20)
+
+	CursorM.Name = "CursorM"
+	CursorM.Parent = Main2
+	CursorM.AnchorPoint = Vector2.new(0.5, 0.5)
+	CursorM.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+	CursorM.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	CursorM.BorderSizePixel = 0
+	CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
+
 	Modal.Name = "Modal"
 	Modal.Text=""
 	Modal.Parent = Cursor
@@ -772,89 +943,6 @@ if not Main then
 	Modal.Font = Enum.Font.SourceSans
 	Modal.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Modal.TextSize = 14.000
-	
-	FOV.Name = "FOV"
-	FOV.ClearTextOnFocus = false
-	FOV.Parent = Aimbot
-	FOV.AnchorPoint = Vector2.new(0.5, 1)
-	FOV.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	FOV.BackgroundTransparency = 1.000
-	FOV.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	FOV.BorderSizePixel = 0
-	FOV.Position = UDim2.new(0.499777138, 0, 0.837965071, 0)
-	FOV.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
-	FOV.Font = Enum.Font.Arial
-	FOV.Text = "100"
-	FOV.PlaceholderText = "100"
-	FOV.TextColor3 = Color3.fromRGB(255, 255, 255)
-	FOV.TextSize = 16.000
-	
-	IconB_2.Name = "IconB"
-	IconB_2.Parent = Aimbot
-	IconB_2.AnchorPoint = Vector2.new(0.5, 1)
-	IconB_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	IconB_2.BackgroundTransparency = 1.000
-	IconB_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	IconB_2.BorderSizePixel = 0
-	IconB_2.Position = UDim2.new(0.498871505, 0, 0.437965214, 0)
-	IconB_2.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
-	IconB_2.Font = Enum.Font.Arial
-	IconB_2.Text = "Фов"
-	IconB_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-	IconB_2.TextSize = 14.000
-	
-	---
-	AimBound.Name = "AimBound"
-	AimBound.ResetOnSpawn = false
-	AimBound.DisplayOrder=99
-	AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
-	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-	Circle.Name = "Circle"
-	Circle.Visible=false
-	Circle.Parent = AimBound
-	Circle.AnchorPoint = Vector2.new(0.5, 0.5)
-	Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Circle.BackgroundTransparency = 1.000
-	Circle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Circle.BorderSizePixel = 0
-	Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Circle.Size = UDim2.new(0, 200, 0, 200)
-
-	UICorner_9.CornerRadius = UDim.new(1, 0)
-	UICorner_9.Parent = Circle
-
-	UIStroke.Parent = Circle
-	UIStroke.Color=Color3.fromRGB(0,255,0)
-	UIStroke.Thickness=1.5
-	
-	IconB_3.Name = "IconB"
-	IconB_3.Parent = Aimbot
-	IconB_3.AnchorPoint = Vector2.new(0.5, 1)
-	IconB_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	IconB_3.BackgroundTransparency = 1.000
-	IconB_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	IconB_3.BorderSizePixel = 0
-	IconB_3.Position = UDim2.new(0.722513676, 0, 0.437965214, 0)
-	IconB_3.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
-	IconB_3.Font = Enum.Font.Arial
-	IconB_3.Text = "Вкл фов рендер"
-	IconB_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-	IconB_3.TextSize = 14.000
-
-	Done6.Name = "Done6"
-	Done6.Parent = Aimbot
-	Done6.AnchorPoint = Vector2.new(0.5, 1)
-	Done6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Done6.BackgroundTransparency = 1.000
-	Done6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Done6.BorderSizePixel = 0
-	Done6.Position = UDim2.new(0.72299999, 0, 1, 0)
-	Done6.Size = UDim2.new(0.100000001, 0, 0.699999988, 0)
-	Done6.Font = Enum.Font.Arial
-	Done6.Text = "Вкл"
-	Done6.TextColor3 = Color3.fromRGB(68, 211, 46)
-	Done6.TextSize = 14.000
 end
 
 local Done1=Done1
@@ -862,6 +950,8 @@ local Done2=Done2
 local Done3=Done3
 local Done4=Done4
 local Done5=Done5
+local Done6=Done6
+local Done7=Done7
 local BasicMenu=BasicMenu
 local AdvencedMenu=AdvencedMenu
 local Modal=Modal
@@ -1092,9 +1182,23 @@ local Instructions={
 		end
 		Circle.Visible=not Circle.Visible
 	end,
+	["Done7"]=function()
+		local tool=Exploiter.Character:FindFirstChildWhichIsA("Tool")
+		if tool then
+			while task.wait() do
+				task.spawn(function()
+					while task.wait() do
+						tool:Activate()
+					end
+				end)
+			end
+		else
+			print("not")
+		end
+	end,
 }
 
-local Dones={Done1,Done2,Done3,Done4,Done5,Done6}
+local Dones={Done1,Done2,Done3,Done4,Done5,Done6,Done7}
 for _,Button in Dones do
 	Button.MouseButton1Click:Connect(function()
 		Instructions[Button.Name]()
@@ -1104,7 +1208,7 @@ end
 local MenuNow="BasicMenu"
 local MenuLast=nil
 
-local MenusB={BasicMenu,AdvencedMenu}
+local MenusB={BasicMenu,AdvencedMenu,NewMenu}
 for _,Button in MenusB do
 	Button.MouseButton1Click:Connect(function()
 		MenuLast=MenuNow
