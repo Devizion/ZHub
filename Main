@@ -1160,9 +1160,15 @@ local Instructions={
 		local tool=Exploiter.Character:FindFirstChildWhichIsA("Tool")
 		if tool then
 			while task.wait() do
+				tool:Activate()
 				task.spawn(function()
 					while task.wait() do
 						tool:Activate()
+						task.spawn(function()
+							while task.wait() do
+								tool:Activate()
+							end
+						end)
 					end
 				end)
 			end
