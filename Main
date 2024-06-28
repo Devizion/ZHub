@@ -871,6 +871,7 @@ if not Main then
 	Done7.TextSize = 14.000
 	
 	AimBound.Name = "AimBound"
+	AimBound.ResetOnSpawn = false
 	AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
 	AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
