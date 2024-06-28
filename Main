@@ -8,14 +8,12 @@ local RunService=game:GetService("RunService")
 local Exploiter=Players.LocalPlayer
 local Camera=workspace.CurrentCamera
 local Mouse=Exploiter:GetMouse()
-
-local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 --step1
 local CompleteAuto=false
 do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
-    local reqTotal=game:HttpGet(path..".json")
+	local reqTotal=game:HttpGet(path..".json")
 
 	local SearchTable=HttpService:JSONDecode(reqTotal)
 	for i,v in SearchTable do
@@ -23,7 +21,7 @@ do
 			table.remove(SearchTable,i)
 		end
 	end
-	
+
 	for _,v in SearchTable do
 		if typeof(v)=="table" and v["UID"]==Exploiter.UserId then
 			CompleteAuto=true
@@ -93,7 +91,7 @@ coroutine.resume(NONThread)
 do
 	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
 	TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
-	task.wait(4)
+	task.wait(8)
 	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
 	task.wait(1.2)
 	coroutine.close(NONThread)
@@ -948,6 +946,7 @@ local Aimbot=false
 local State=true
 local ESPstate=true
 
+local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 local tab={}
 
 local function tryFindPlr(Needs)
