@@ -15,14 +15,17 @@ local CompleteAuto=false
 do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
-	local SearchTable=HttpService:JSONDecode(game:HttpGet(path..".json"))
+    local reqTotal=game:HttpGet(path..".json")
+
+	local SearchTable=HttpService:JSONDecode(reqTotal)
 	for i,v in SearchTable do
 		if v==nil then
 			table.remove(SearchTable,i)
 		end
 	end
+	
 	for _,v in SearchTable do
-		if v["UID"]==Exploiter.UserId then
+		if typeof(v)=="table" and v["UID"]==Exploiter.UserId then
 			CompleteAuto=true
 		end
 	end
