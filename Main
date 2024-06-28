@@ -15,40 +15,12 @@ local CompleteAuto=false
 do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
-	local dir=path..".json"
-	local reqTotal
-
-	local request={}
-	request.Url=dir
-	request.Method="GET"
-
-	reqTotal=HttpService:RequestAsync(request)
-	local SearchTable=HttpService:JSONDecode(reqTotal.Body)
+	local SearchTable=HttpService:JSONDecode(game:HttpGet(path..".json"))
 	for i,v in SearchTable do
 		if v==nil then
 			table.remove(SearchTable,i)
 		end
 	end
-	
-	local ToDeleteKey
-	for i,v in SearchTable do
-		if v and typeof(v)=="table" and v["Time"]+v["Time_Of_Buy"]<os.time() then
-			ToDeleteKey=i-1
-		end
-	end
-
-	if ToDeleteKey then
-		local dir=path.."/"..tostring(ToDeleteKey)..".json"
-		local request={}
-		request.Url=dir
-		request.Method="DELETE"
-		request.Headers = {}
-		request.Headers["Content-Type"] = "application/x-www-form-urlencoded"
-		request.Body=HttpService:JSONEncode("")
-
-		reqTotal=HttpService:RequestAsync(request)
-	end
-	
 	for _,v in SearchTable do
 		if v["UID"]==Exploiter.UserId then
 			CompleteAuto=true
