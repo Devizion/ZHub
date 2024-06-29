@@ -1038,6 +1038,7 @@ local function drawESP()
 				Bild2.Size=UDim2.new(4,0,12,0)
 				Bild2.Adornee=Model.PrimaryPart
 				Bild2.AlwaysOnTop=true
+				Bild2.DisplayOrder=math.huge
 
 				Frame2.Name="Frame2"
 				Frame2.BackgroundTransparency=1
