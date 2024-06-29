@@ -1028,7 +1028,26 @@ local function drawESP()
 				Frame.Position=UDim2.new(0.5,0,0.5,0)
 
 				UIs.Color=Color3.fromRGB(0, 255, 0)
-				UIs.Thickness=3
+				UIs.Thickness=1.5
+				
+				local Frame2=Instance.new("Frame",Bild)
+				local TextLabel=Instance.new("TextLabel",Frame2)
+
+				Frame2.Name="Frame2"
+				Frame2.BackgroundTransparency=1
+				Frame2.AnchorPoint=Vector2.new(0.5,0.5)
+				Frame2.Size=UDim2.new(1,0,0.25,0)
+				Frame2.Position=UDim2.new(0.5,0,0.1,0)
+
+				TextLabel.BackgroundTransparency=1
+				TextLabel.AnchorPoint=Vector2.new(0.5,0.5)
+				TextLabel.Size=UDim2.new(1,0,1,0) 
+				TextLabel.Position=UDim2.new(0.5,0,0.5,0)
+				TextLabel.TextColor3=Color3.fromRGB(255, 255, 255)
+				TextLabel.TextStrokeColor3=Color3.fromRGB(0, 0, 0)
+				TextLabel.TextSize=7
+				TextLabel.TextStrokeTransparency=0
+				TextLabel.Text=Model.Name
 			end
 		end
 	end)
