@@ -1022,7 +1022,6 @@ local function drawESP()
 				Bild.Size=UDim2.new(4,0,6,0)
 				Bild.Adornee=Model.PrimaryPart
 				Bild.AlwaysOnTop=true
-				Bild.DisplayOrder = math.huge-1
 
 				Frame.BackgroundTransparency=1
 				Frame.AnchorPoint=Vector2.new(0.5,0.5)
@@ -1038,7 +1037,7 @@ local function drawESP()
 
 				Bild2.Name="ESP2"
 				Bild2.Size=UDim2.new(4,0,12,0)
-				Bild2.DisplayOrder = math.huge
+				Bild2.StudsOffset=Vector3.new(0,0,-1)
 				Bild2.Adornee=Model.PrimaryPart
 				Bild2.AlwaysOnTop=true
 
