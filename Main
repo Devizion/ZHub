@@ -6,7 +6,13 @@ local TweenService=game:GetService("TweenService")
 local RunService=game:GetService("RunService")
 --Const
 local Exploiter=Players.LocalPlayer
-local Camera=workspace.CurrentCamera
+local Camera = workspace.CurrentCamera
+workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+	local newCamera = workspace.CurrentCamera
+	if newCamera then
+		Camera = newCamera
+	end
+end)
 local Mouse=Exploiter:GetMouse()
 --step1
 local CompleteAuto=false
@@ -1112,15 +1118,18 @@ local Instructions={
 	end,
 	["Done4"]=function()
 		local C=nil
+
 		table.clear(tab)
 
 		Done4.Text="Вкл"
 		Done4.TextColor3=Color3.fromRGB(68, 211, 46)
 
-		if ThreadAim then
-			coroutine.close(ThreadAim)
+		if Aimbot then
+            RunService:UnbindFromRenderStep("Aimbot")
+			--coroutine.close(ThreadAim)
 			table.clear(tab)
 			ThreadAim=nil
+            Aimbot=false
 			return
 		end
 
@@ -1156,24 +1165,32 @@ local Instructions={
 		if not C or not C.PrimaryPart or #tab==0 then return end
 		if not C:FindFirstChild("Head") then
 			if C.PrimaryPart then
-				ThreadAim=coroutine.create(function()
+                Aimbot=true
+                RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value, function()
+                    Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
+                end)
+				--[[ThreadAim=coroutine.create(function()
 					while task.wait() do
 						Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
 					end
 				end)
-				coroutine.resume(ThreadAim)
+				coroutine.resume(ThreadAim)]]
 				Done4.Text="Выкл"
 				Done4.TextColor3=Color3.fromRGB(190, 18, 18)
 			else
 				return
 			end
 		else
-			ThreadAim=coroutine.create(function()
+            Aimbot=true
+            RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value, function()
+                Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
+            end)
+			--[[ThreadAim=coroutine.create(function()
 				while task.wait() do
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
 				end
 			end)
-			coroutine.resume(ThreadAim)
+			coroutine.resume(ThreadAim)]]
 			Done4.Text="Выкл"
 			Done4.TextColor3=Color3.fromRGB(190, 18, 18)
 		end
@@ -1198,23 +1215,6 @@ local Instructions={
 	end,
 	["Done7"]=function()
 		local tool=Exploiter.Character:FindFirstChildWhichIsA("Tool")
-		if tool then
-			while task.wait() do
-				tool:Activate()
-				task.spawn(function()
-					while task.wait() do
-						tool:Activate()
-						task.spawn(function()
-							while task.wait() do
-								tool:Activate()
-							end
-						end)
-					end
-				end)
-			end
-		else
-			print("not")
-		end
 	end,
 }
 
