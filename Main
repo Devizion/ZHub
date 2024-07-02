@@ -16,7 +16,7 @@ end)
 local Mouse=Exploiter:GetMouse()
 --step1
 local CompleteAuto=false
-do
+--[[do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
 	local reqTotal=game:HttpGet(path..".json")
@@ -38,7 +38,7 @@ do
 			if true then else end
 		end
 	end
-end
+end]]
 --Create Gui
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
@@ -48,7 +48,7 @@ local UIGradient = Instance.new("UIGradient")
 Instalation.Name = "Instalation"
 Instalation.ResetOnSpawn = false
 Instalation.DisplayOrder = math.huge
-Instalation.Parent = Exploiter:WaitForChild("PlayerGui")
+Instalation.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main.Name = "Main"
@@ -191,7 +191,7 @@ if not Main then
 	Modal = Instance.new("TextButton")
 
 	Main.Name = "Main"
-	Main.Parent = Exploiter:WaitForChild("PlayerGui")
+	Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	Main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	Main.ResetOnSpawn = false
 	Main.DisplayOrder = math.huge
@@ -934,7 +934,28 @@ if not Main then
 	Modal.Font = Enum.Font.SourceSans
 	Modal.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Modal.TextSize = 14.000
-	
+end
+
+local Done1=Done1
+local Done2=Done2
+local Done3=Done3
+local Done4=Done4
+local Done5=Done5
+local Done6=Done6
+local Done7=Done7
+local BasicMenu=BasicMenu
+local AdvencedMenu=AdvencedMenu
+local Modal=Modal
+local FOV=FOV
+local Aimbound=AimBound
+
+local X,Y,Z=X,Y,Z
+
+local Player=Player
+local Number=Number
+local Main2=Main2
+
+do
 	local Watermark = Instance.new("Frame")
 	local Name2_10 = Instance.new("TextLabel")
 	local ver_10 = Instance.new("TextLabel")
@@ -999,25 +1020,6 @@ if not Main then
 
 	UIGradient_15.Parent = Name2_10
 end
-
-local Done1=Done1
-local Done2=Done2
-local Done3=Done3
-local Done4=Done4
-local Done5=Done5
-local Done6=Done6
-local Done7=Done7
-local BasicMenu=BasicMenu
-local AdvencedMenu=AdvencedMenu
-local Modal=Modal
-local FOV=FOV
-local Aimbound=AimBound
-
-local X,Y,Z=X,Y,Z
-
-local Player=Player
-local Number=Number
-local Main2=Main2
 
 --Func
 local Thread=nil
