@@ -982,20 +982,20 @@ if not Main then
 	ver_10.TextXAlignment = Enum.TextXAlignment.Right
 	ver_10.TextYAlignment = Enum.TextYAlignment.Bottom
 
-	Name2_10.Name = "Name"
-	Name2_10.Parent = Watermark
-	Name2_10.AnchorPoint = Vector2.new(0.5, 0.5)
-	Name2_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Name2_10.BackgroundTransparency = 1.000
-	Name2_10.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Name2_10.BorderSizePixel = 0
-	Name2_10.Position = UDim2.new(0.337593168, 0, 0.269222468, 0)
-	Name2_10.Size = UDim2.new(0.200000003, 0, 0.0850000009, 0)
-	Name2_10.Font = Enum.Font.Arial
-	Name2_10.Text = "Hub"
-	Name2_10.TextColor3 = Color3.fromRGB(186, 186, 186)
-	Name2_10.TextSize = 45.000
-	Name2_10.TextXAlignment = Enum.TextXAlignment.Left
+	Name_10.Name = "Name"
+	Name_10.Parent = Watermark
+	Name_10.AnchorPoint = Vector2.new(0.5, 0.5)
+	Name_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Name_10.BackgroundTransparency = 1.000
+	Name_10.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Name_10.BorderSizePixel = 0
+	Name_10.Position = UDim2.new(0.337593168, 0, 0.269222468, 0)
+	Name_10.Size = UDim2.new(0.200000003, 0, 0.0850000009, 0)
+	Name_10.Font = Enum.Font.Arial
+	Name_10.Text = "Hub"
+	Name_10.TextColor3 = Color3.fromRGB(186, 186, 186)
+	Name_10.TextSize = 45.000
+	Name_10.TextXAlignment = Enum.TextXAlignment.Left
 
 	UIGradient_15.Parent = Name2_10
 end
