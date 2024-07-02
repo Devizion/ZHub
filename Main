@@ -97,7 +97,7 @@ coroutine.resume(NONThread)
 do
 	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
 	TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
-	task.wait(4)
+	task.wait(3)
 	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
 	task.wait(1.2)
 	coroutine.close(NONThread)
@@ -164,7 +164,7 @@ if not Main then
 	local UICorner_8 = Instance.new("UICorner")
 	local UIGradient_10 = Instance.new("UIGradient")
 	Done4 = Instance.new("TextButton")
-	Bind = Instance.new("TextBox")
+	Bind = Instance.new("TextButton")
 	local IconB = Instance.new("TextLabel")
 	local IconB_2 = Instance.new("TextLabel")
 	FOV = Instance.new("TextBox")
@@ -703,7 +703,6 @@ if not Main then
 	Bind.Position = UDim2.new(0.274777204, 0, 0.837965071, 0)
 	Bind.Size = UDim2.new(0.200000003, 0, 0.300000012, 0)
 	Bind.Font = Enum.Font.Arial
-	Bind.PlaceholderText = "Клавиша"
 	Bind.Text = "X"
 	Bind.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Bind.TextSize = 16.000
@@ -965,6 +964,8 @@ local Aimbot=false
 local State=true
 local ESPstate=true
 
+local RegButton=Enum.KeyCode.X
+
 local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 local tab={}
 
@@ -1125,11 +1126,11 @@ local Instructions={
 		Done4.TextColor3=Color3.fromRGB(68, 211, 46)
 
 		if Aimbot then
-            RunService:UnbindFromRenderStep("Aimbot")
+			RunService:UnbindFromRenderStep("Aimbot")
 			--coroutine.close(ThreadAim)
 			table.clear(tab)
 			ThreadAim=nil
-            Aimbot=false
+			Aimbot=false
 			return
 		end
 
@@ -1165,10 +1166,10 @@ local Instructions={
 		if not C or not C.PrimaryPart or #tab==0 then return end
 		if not C:FindFirstChild("Head") then
 			if C.PrimaryPart then
-                Aimbot=true
-                RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value, function()
-                    Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
-                end)
+				Aimbot=true
+				RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value, function()
+					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
+				end)
 				--[[ThreadAim=coroutine.create(function()
 					while task.wait() do
 						Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.PrimaryPart.Position)
@@ -1181,10 +1182,10 @@ local Instructions={
 				return
 			end
 		else
-            Aimbot=true
-            RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value, function()
-                Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
-            end)
+			Aimbot=true
+			RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value, function()
+				Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
+			end)
 			--[[ThreadAim=coroutine.create(function()
 				while task.wait() do
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,C.Head.Position)
@@ -1244,8 +1245,25 @@ for _,Button in MenusB do
 	end)
 end
 
+Bind.MouseButton1Click:Connect(function()
+	Bind.Text="Запись..."
+	Bind.TextColor3=Color3.fromRGB(178, 178, 178)
+	
+	local conn
+	conn=UserInputService.InputBegan:Connect(function(input)
+		RegButton=input.KeyCode
+		if RegButton==Enum.KeyCode.Escape then
+			RegButton=Enum.KeyCode.X
+		end
+		
+		Bind.Text=RegButton.Name
+		Bind.TextColor3=Color3.fromRGB(255, 255, 255)
+		conn:Disconnect()
+	end)
+end)
+
 UserInputService.InputBegan:Connect(function(input,gpe)
-	if input.KeyCode==Enum.KeyCode[Bind.Text] and not gpe then
+	if input.KeyCode==RegButton and not gpe then
 		Instructions[Done4.Name]()
 	end
 end)
