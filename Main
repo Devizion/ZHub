@@ -942,7 +942,7 @@ if not Main then
 	local UIGradient_15 = Instance.new("UIGradient")
 
 	Watermark.Name = "Watermark"
-	Watermark.Parent = game.StarterGui.Main
+	Watermark.Parent = Main
 	Watermark.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Watermark.BackgroundTransparency = 1.000
 	Watermark.BorderColor3 = Color3.fromRGB(0, 0, 0)
