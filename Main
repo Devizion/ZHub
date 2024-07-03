@@ -1314,7 +1314,7 @@ local Instructions={
 					local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
 					if Model then C=Model:FindFirstChildOfClass("Humanoid") end
 					if C and tryFindPlr(Model.Name) then
-						mouse1click() task.wait()
+						--mouse1click() task.wait()
                         return
 					end
 				end)
@@ -1337,7 +1337,7 @@ local Instructions={
 				local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
 				if Model then C=Model:FindFirstChildOfClass("Humanoid") end
 				if C and tryFindPlr(Model.Name) then
-					mouse1click() task.wait()
+					--mouse1click() task.wait()
                     return
 				end
 			end)
@@ -1390,7 +1390,7 @@ local Instructions={
 			local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
 			if Model then C=Model:FindFirstChildOfClass("Humanoid") end
 			if C then
-				mouse1click() task.wait()
+				--mouse1click() task.wait()
                 return
 			end
 		end)
