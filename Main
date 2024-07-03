@@ -1,5 +1,5 @@
 --Params
-local vers="1.8"
+local vers="1.9"
 --Serives
 local Players=game:GetService("Players")
 local UserInputService=game:GetService("UserInputService")
@@ -18,7 +18,7 @@ end)
 local Mouse=Exploiter:GetMouse()
 --step1
 local CompleteAuto=false
---[[do
+do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
 	local reqTotal=game:HttpGet(path..".json")
@@ -40,7 +40,7 @@ local CompleteAuto=false
 			if true then else end
 		end
 	end
-end]]
+end
 --Create Gui
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
