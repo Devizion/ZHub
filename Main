@@ -1,5 +1,5 @@
 --Params
-local vers="v1.9"
+local vers="v2.0 BETA"
 --Serives
 local Players=game:GetService("Players")
 local UserInputService=game:GetService("UserInputService")
@@ -18,6 +18,10 @@ end)
 local Mouse=Exploiter:GetMouse()
 --step1
 local CompleteAuto=false
+
+local hitSound=Instance.new("Sound",Exploiter)
+hitSound.Looped=false
+hitSound.SoundId="rbxassetid://8679627751"
 do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
@@ -1304,6 +1308,21 @@ local Instructions={
 
 				RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value-1, function()
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,PrimaryPart.Position)
+					
+					local conn
+					conn=C.Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+						for i,v in C.Humanoid:GetChildren() do
+							if v:IsA("ObjectValue") and v.Value and v.Value:IsA("Player") then
+								local kill=v.Value
+								if kill==Exploiter then
+									hitSound:Play()
+									conn:Disconnect()
+									return
+								end
+							end
+						end
+						return
+					end)
 				end)
 
 				Done4.Text="Выкл"
@@ -1316,6 +1335,21 @@ local Instructions={
 
 			RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value-1, function()
 				Camera.CFrame=CFrame.new(Camera.CFrame.Position,Head.Position)
+				
+				local conn
+				conn=C.Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+					for i,v in C.Humanoid:GetChildren() do
+						if v:IsA("ObjectValue") and v.Value and v.Value:IsA("Player") then
+							local kill=v.Value
+							if kill==Exploiter then
+								hitSound:Play()
+								conn:Disconnect()
+								return
+							end
+						end
+					end
+					return
+				end)
 			end)
 
 			Done4.Text="Выкл"
@@ -1358,7 +1392,6 @@ local Instructions={
 		end
 
 		TriggerBot=true
-
 		RunService:BindToRenderStep("TriggerBot",Enum.RenderPriority.Camera.Value-2,function()
 			if TriggerBot_Aim then
 				if Aimbot then
@@ -1367,8 +1400,15 @@ local Instructions={
 					local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
 					if Model then C=Model:FindFirstChildOfClass("Humanoid") end
 					if C and tryFindPlr(Model.Name) then
-						mouse1click() task.wait()
-						return
+						mouse1press() 
+						mouse1release()
+						--[[local conn
+						conn=C:GetPropertyChangedSignal("Health"):Connect(function()
+							hitSound:Play()
+							conn:Disconnect()
+							C=nil
+							return
+						end)]]
 					end
 				end
 			else
@@ -1377,8 +1417,15 @@ local Instructions={
 				local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
 				if Model then C=Model:FindFirstChildOfClass("Humanoid") end
 				if C and tryFindPlr(Model.Name) then
-					mouse1click() task.wait()
-					return
+					mouse1press()
+					mouse1release()
+					--[[local conn
+					conn=C:GetPropertyChangedSignal("Health"):Connect(function()
+						hitSound:Play()
+						conn:Disconnect()
+						C=nil
+						return
+					end)]]
 				end
 			end
 		end)
