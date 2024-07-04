@@ -1,5 +1,5 @@
 --Params
-local vers="1.8"
+local vers="v1.9"
 --Serives
 local Players=game:GetService("Players")
 local UserInputService=game:GetService("UserInputService")
@@ -1261,10 +1261,8 @@ local Instructions={
 
 		if Aimbot then
 			RunService:UnbindFromRenderStep("Aimbot")
-			--RunService:UnbindFromRenderStep("TriggerBot_Aim")
 			table.clear(tab)
 			Aimbot=false
-			TriggerBot=false
 			return
 		end
 
@@ -1308,17 +1306,6 @@ local Instructions={
 					Camera.CFrame=CFrame.new(Camera.CFrame.Position,PrimaryPart.Position)
 				end)
 
-				--[[RunService:BindToRenderStep("TriggerBot_Aim",Enum.RenderPriority.Camera.Value+1,function()
-					local C
-					if not Mouse.Target then return end
-					local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
-					if Model then C=Model:FindFirstChildOfClass("Humanoid") end
-					if C and tryFindPlr(Model.Name) then
-						mouse1click() task.wait()
-						return
-					end
-				end)]]
-
 				Done4.Text="Выкл"
 				Done4.TextColor3=Color3.fromRGB(190, 18, 18)
 			else
@@ -1330,17 +1317,6 @@ local Instructions={
 			RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value-1, function()
 				Camera.CFrame=CFrame.new(Camera.CFrame.Position,Head.Position)
 			end)
-
-			--[[RunService:BindToRenderStep("TriggerBot_Aim",Enum.RenderPriority.Camera.Value+1,function()
-				local C
-				if not Mouse.Target then return end
-				local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
-				if Model then C=Model:FindFirstChildOfClass("Humanoid") end
-				if C and tryFindPlr(Model.Name) then
-					mouse1click() task.wait()
-					return
-				end
-			end)]]
 
 			Done4.Text="Выкл"
 			Done4.TextColor3=Color3.fromRGB(190, 18, 18)
@@ -1375,25 +1351,37 @@ local Instructions={
 		Done8.Text="Вкл"
 		Done8.TextColor3=Color3.fromRGB(68, 211, 46)
 
-		--[[if TriggerBot_Aim then return end
-
 		if TriggerBot then
+			RunService:UnbindFromRenderStep("TriggerBot")
 			TriggerBot=false
 			return
 		end
 
 		TriggerBot=true
 
-		RunService:BindToRenderStep("TriggerBot",Enum.RenderPriority.Camera.Value+1,function()
-			local C
-			if not Mouse.Target then return end
-			local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
-			if Model then C=Model:FindFirstChildOfClass("Humanoid") end
-			if C then
-				mouse1click() task.wait()
-				return
+		RunService:BindToRenderStep("TriggerBot",Enum.RenderPriority.Camera.Value-2,function()
+			if TriggerBot_Aim then
+				if Aimbot then
+					local C
+					if not Mouse.Target then return end
+					local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
+					if Model then C=Model:FindFirstChildOfClass("Humanoid") end
+					if C and tryFindPlr(Model.Name) then
+						mouse1click() task.wait()
+						return
+					end
+				end
+			else
+				local C
+				if not Mouse.Target then return end
+				local Model=Mouse.Target:FindFirstAncestorOfClass("Model")
+				if Model then C=Model:FindFirstChildOfClass("Humanoid") end
+				if C and tryFindPlr(Model.Name) then
+					mouse1click() task.wait()
+					return
+				end
 			end
-		end)]]
+		end)
 
 		Done8.Text="Выкл"
 		Done8.TextColor3=Color3.fromRGB(190, 18, 18)
