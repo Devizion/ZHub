@@ -1489,6 +1489,7 @@ local Instructions={
 				end
 			end
 		end)
+		coroutine.resume(ThreadAntiAim)
 		
 		Done7.Text="Выкл"
 		Done7.TextColor3=Color3.fromRGB(190, 18, 18)
