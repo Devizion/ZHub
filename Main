@@ -3,7 +3,7 @@ if _G.ZHub_Loaded then
 end
 
 --Params
-local vers="v2.0 BETA"
+local vers="v2.1 BETA"
 --Serives
 local Players=game:GetService("Players")
 local UserInputService=game:GetService("UserInputService")
@@ -32,9 +32,6 @@ end
 --step1
 local CompleteAuto=false
 
-local hitSound=Instance.new("Sound",Exploiter)
-hitSound.Looped=false
-hitSound.SoundId="rbxassetid://8679627751"
 do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
@@ -192,7 +189,7 @@ local UIGradient_11 = Instance.new("UIGradient")
 Done5 = Instance.new("TextButton")
 local Name_6 = Instance.new("TextLabel")
 local NewMenu_2 = Instance.new("Folder")
-local ToolCrash = Instance.new("Frame")
+local AntiAim = Instance.new("Frame")
 local Name_7 = Instance.new("TextLabel")
 local UICorner_10 = Instance.new("UICorner")
 local UIGradient_12 = Instance.new("UIGradient")
@@ -389,7 +386,7 @@ NewMenu.BorderSizePixel = 0
 NewMenu.Position = UDim2.new(0.5, 0, 0.224999994, 0)
 NewMenu.Size = UDim2.new(1, 0, 0.075000003, 0)
 NewMenu.Font = Enum.Font.Arial
-NewMenu.Text = "Особые функции"
+NewMenu.Text = "ХВХ функции"
 NewMenu.TextColor3 = Color3.fromRGB(255, 255, 255)
 NewMenu.TextSize = 18.000
 
@@ -852,19 +849,19 @@ Name_6.TextXAlignment = Enum.TextXAlignment.Left
 NewMenu_2.Name = "NewMenu"
 NewMenu_2.Parent = Menus
 
-ToolCrash.Name = "ToolCrash"
-ToolCrash.Parent = NewMenu_2
-ToolCrash.AnchorPoint = Vector2.new(1, 0.5)
-ToolCrash.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
-ToolCrash.BackgroundTransparency = 0.200
-ToolCrash.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ToolCrash.BorderSizePixel = 0
-ToolCrash.Position = UDim2.new(0.949999988, 0, 0.25999999, 0)
-ToolCrash.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
-ToolCrash.Visible = false
+AntiAim.Name = "AntiAim"
+AntiAim.Parent = NewMenu_2
+AntiAim.AnchorPoint = Vector2.new(1, 0.5)
+AntiAim.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+AntiAim.BackgroundTransparency = 0.200
+AntiAim.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AntiAim.BorderSizePixel = 0
+AntiAim.Position = UDim2.new(0.949999988, 0, 0.25999999, 0)
+AntiAim.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+AntiAim.Visible = false
 
 Name_7.Name = "Name"
-Name_7.Parent = ToolCrash
+Name_7.Parent = AntiAim
 Name_7.AnchorPoint = Vector2.new(0, 0.5)
 Name_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Name_7.BackgroundTransparency = 1.000
@@ -873,20 +870,20 @@ Name_7.BorderSizePixel = 0
 Name_7.Position = UDim2.new(0.00999998488, 0, 0.50000006, 0)
 Name_7.Size = UDim2.new(0.150000006, 0, 0.800000012, 0)
 Name_7.Font = Enum.Font.Arial
-Name_7.Text = "Тул краш"
+Name_7.Text = "Анти-аим"
 Name_7.TextColor3 = Color3.fromRGB(255, 255, 255)
 Name_7.TextSize = 14.000
 Name_7.TextXAlignment = Enum.TextXAlignment.Left
 
-UICorner_10.Parent = ToolCrash
+UICorner_10.Parent = AntiAim
 
 UIGradient_12.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.11, Color3.fromRGB(255, 193, 117)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
 UIGradient_12.Offset = Vector2.new(-0.100000001, 0)
 UIGradient_12.Rotation = 2
-UIGradient_12.Parent = ToolCrash
+UIGradient_12.Parent = AntiAim
 
 Done7.Name = "Done7"
-Done7.Parent = ToolCrash
+Done7.Parent = AntiAim
 Done7.AnchorPoint = Vector2.new(1, 0.5)
 Done7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Done7.BackgroundTransparency = 1.000
@@ -903,7 +900,7 @@ AimBound.Name = randomString()
 AimBound.ResetOnSpawn = false
 AimBound.DisplayOrder = math.huge-2
 AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
-AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
 Circle.Name = "Circle"
 Circle.Visible = false
@@ -1108,6 +1105,7 @@ local TriggerBot_Aim=false
 local TriggerBot=false
 local State=true
 local ESPstate=false
+local AntiAim=false
 
 local HealthLast
 local HealthNow
@@ -1116,6 +1114,19 @@ local RegButton=Enum.KeyCode.X
 
 local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 local tab={}
+
+local hitSound=Instance.new("Sound",Exploiter)
+hitSound.Looped=false
+hitSound.SoundId="rbxassetid://8679627751"
+hitSound.Volume=0.8
+
+local Anim=Instance.new("Animation",Exploiter)
+Anim.AnimationId="rbxassetid://18343395912"
+local track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
+
+Exploiter.CharacterAdded:Connect(function(Char)
+	track=Char.Humanoid.Animator:LoadAnimation(Anim)
+end)
 
 local function tryFindPlr(Needs)
 	if not Needs or typeof(Needs)~="string" then return end
@@ -1130,18 +1141,35 @@ local function tryFindPlr(Needs)
 	end
 end
 
+local function checkRig()
+	local Char=Exploiter.Character
+	if Char:FindFirstChild("Torso") then
+		return "r6"
+	elseif Char:FindFirstChild("UpperTorso") then
+		return "r15"
+	else
+		return "other"
+	end
+end
+
+local function getRoot(Char)
+	return Char.PrimaryPart or Char:FindFirstChild("Torso") or Char:FindFirstChild("UpperTorso")
+end
+
 local function tpPos(X,Y,Z)
+	local Root=getRoot(Exploiter.Character)
 	if typeof(X or Y or Z)~="number" then warn("не число") return end
-	Exploiter.Character.PrimaryPart.CFrame=Exploiter.Character.PrimaryPart.CFrame*CFrame.new(X,Y,Z)
+	Root.CFrame=Root.CFrame*CFrame.new(X,Y,Z)
 end
 
 local function tpPlayer(PlayerName)
 	local NowPlayer=tryFindPlr(PlayerName)
 	if not NowPlayer then warn("не нашёл игрока") return end
-	local Chr=NowPlayer.Character or NowPlayer.CharacterAdded:Wait()
+	local Chr=NowPlayer.Character
 
-	if Chr and Chr.PrimaryPart then
-		Exploiter.Character.PrimaryPart.CFrame=Chr.PrimaryPart.CFrame*CFrame.new(0,0,2)
+	local RootPlr=getRoot(Chr)
+	if Chr and RootPlr then
+		getRoot(Exploiter.Character).CFrame=RootPlr.CFrame*CFrame.new(0,0,2)
 	end
 end
 
@@ -1169,14 +1197,16 @@ local function drawESP()
 			for _,v in Players:GetPlayers() do
 				local Model=v.Character
 				if not Model or Model:FindFirstChild("ESP") or Model==Exploiter.Character or not Model.PrimaryPart then continue end
-
+				
+				local Root=getRoot(Model)
+				
 				local Bild=Instance.new("BillboardGui",Model)
 				local Frame=Instance.new("Frame",Bild)
 				local UIs=Instance.new("UIStroke",Frame)
 
 				Bild.Name=randomString()
 				Bild.Size=UDim2.new(4,0,6,0)
-				Bild.Adornee=Model.PrimaryPart
+				Bild.Adornee=Root
 				Bild.AlwaysOnTop=true
 
 				Frame.BackgroundTransparency=1
@@ -1194,7 +1224,7 @@ local function drawESP()
 				Bild2.Name=randomString()
 				Bild2.Size=UDim2.new(4,0,12,0)
 				Bild2.StudsOffset=Vector3.new(0,0,-1)
-				Bild2.Adornee=Model.PrimaryPart
+				Bild2.Adornee=Root
 				Bild2.AlwaysOnTop=true
 
 				Frame2.Name="Frame2"
@@ -1226,7 +1256,7 @@ local function destoyESP()
 
 	for _,v in Players:GetPlayers() do
 		local Model=v.Character
-		if not Model or not Model:FindFirstChild("ESP") or not Model:FindFirstChild("ESP2") or not Model.PrimaryPart then continue end
+		if not Model or not Model:FindFirstChild("ESP") or not Model:FindFirstChild("ESP2") or not getRoot(Model) then continue end
 
 		Model.ESP:Destroy()
 		Model.ESP2:Destroy()
@@ -1285,12 +1315,13 @@ local Instructions={
 
 		for _,Plr in Players:GetPlayers() do
 			local Vec2P,Vec2M,Pos,OnScreen=nil
-
+			local CRoot=getRoot(Plr.Character)
+			
 			if Plr.Character==Exploiter.Character then continue end
 			C=Plr.Character
-			if not C or not C.PrimaryPart then continue end
+			if not C or not CRoot then continue end
 
-			Pos,OnScreen=Camera:WorldToScreenPoint(Plr.Character.PrimaryPart.Position)
+			Pos,OnScreen=Camera:WorldToScreenPoint(CRoot.Position)
 			Vec2P,Vec2M=Vector2.new(Pos.X,Pos.Y),Vector2.new(Mouse.X,Mouse.Y)
 
 			if OnScreen==true then
@@ -1311,16 +1342,16 @@ local Instructions={
 				end
 			end
 		end
-
-		if not C or not C.PrimaryPart or #tab==0 then return end
-		local Head=C:FindFirstChild("Head")
-		local PrimaryPart=C.PrimaryPart
+		
+		local CRoot=getRoot(C)
+		if not C or not CRoot or #tab==0 then return end
+		local Head=C:FindFirstChild("Head")		
 		if not Head then
-			if PrimaryPart then
+			if CRoot then
 				Aimbot=true
 
 				RunService:BindToRenderStep("Aimbot", Enum.RenderPriority.Camera.Value-1, function()
-					Camera.CFrame=CFrame.new(Camera.CFrame.Position,PrimaryPart.Position)
+					Camera.CFrame=CFrame.new(Camera.CFrame.Position,CRoot)
 					
 					HealthLast=C.Humanoid.Health
 					local conn
@@ -1403,7 +1434,36 @@ local Instructions={
 		Circle.Visible=not Circle.Visible
 	end,
 	["Done7"]=function()
-		local tool=Exploiter.Character:FindFirstChildWhichIsA("Tool")
+		Done7.Text="Вкл"
+		Done7.TextColor3=Color3.fromRGB(68, 211, 46)
+		
+		if AntiAim then
+			for i,v in getRoot(Exploiter.Character):GetChildren() do
+				if v:IsA("BodyAngularVelocity") then
+					v:Destroy()
+				end
+			end
+			AntiAim=false
+			return
+		end
+		
+		AntiAim=true
+		track:Play()
+
+		local Anti=Instance.new("BodyAngularVelocity")
+		Anti.Parent=getRoot(Exploiter.Character)
+		Anti.AngularVelocity=Vector3.new(0,30,0)
+		Anti.MaxTorque=Vector3.new(0,math.huge,0)
+		Anti.P = math.huge
+		local Char=Exploiter.Character:GetChildren()
+		for i, v in next, Char do
+			if v:IsA("BasePart") then
+				v.Velocity=Vector3.new(0, 0, 0)
+			end
+		end
+		
+		Done7.Text="Выкл"
+		Done7.TextColor3=Color3.fromRGB(190, 18, 18)
 	end,
 	["Done8"]=function()
 		Done8.Text="Вкл"
