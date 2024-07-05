@@ -1449,7 +1449,7 @@ local Instructions={
 			AntiAim=false
 			return
 		end
-		
+		print(track)
 		AntiAim=true
 		track:Play()
 
@@ -1471,10 +1471,7 @@ local Instructions={
 				track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
 			end
 			if not track then conn:Disconnect() return end
-			print("new char!")
 			track:Play()
-			
-			print("check")
 			
 			local Anti=Instance.new("BodyAngularVelocity")
 			Anti.Parent=getRoot(Exploiter.Character)
