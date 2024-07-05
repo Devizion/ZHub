@@ -1472,6 +1472,7 @@ local Instructions={
 		ThreadAntiAim=coroutine.create(function()
 			while task.wait(1) do
 				if AntiAim and not getRoot(Exploiter.Character):FindFirstChildWhichIsA("BodyAngularVelocity") then
+					print("spawn")
 					if Exploiter.Character and Exploiter.Character:FindFirstChild("Humanoid") then
 						track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
 					end
