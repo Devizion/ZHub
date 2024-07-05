@@ -1125,7 +1125,7 @@ Anim.AnimationId="rbxassetid://18343395912"
 local track
 
 Exploiter.CharacterAdded:Connect(function(Char)
-	if Char:FindFirstChild("Humanoid") then
+	if Char and Char:FindFirstChild("Humanoid") then
 		track=Char.Humanoid.Animator:LoadAnimation(Anim)
 	end
 end)
