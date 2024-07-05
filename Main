@@ -1448,6 +1448,9 @@ local Instructions={
 				end
 			end
 			AntiAim=false
+			if ThreadAntiAim then
+				coroutine.close(ThreadAntiAim)
+			end
 			return
 		end
 		print(track)
