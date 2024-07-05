@@ -32,7 +32,7 @@ end
 --step1
 local CompleteAuto=false
 
---[[do
+do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
 
 	local reqTotal=game:HttpGet(path..".json")
@@ -54,7 +54,7 @@ local CompleteAuto=false
 			if true then else end
 		end
 	end
-end]]
+end
 --Create Gui
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
