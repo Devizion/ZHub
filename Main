@@ -3,7 +3,7 @@ if _G.ZHub_Loaded then
 end
 
 --Params
-local vers="v2.1 BETA"
+local vers="v2.0 BETA"
 --Serives
 local Players=game:GetService("Players")
 local UserInputService=game:GetService("UserInputService")
@@ -1118,6 +1118,7 @@ local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 local tab={}
 
 local function tryFindPlr(Needs)
+	if not Needs or typeof(Needs)~="string" then return end
 	Needs=string.lower(Needs)
 	local TableOfNames=Players:GetPlayers()
 
