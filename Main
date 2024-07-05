@@ -1122,9 +1122,12 @@ hitSound.Volume=0.8
 
 local Anim=Instance.new("Animation",Exploiter)
 Anim.AnimationId="rbxassetid://18343395912"
+local track
 
 Exploiter.CharacterAdded:Connect(function(Char)
-	track=Char.Humanoid.Animator:LoadAnimation(Anim)
+	if Char:FindFirstChild("Humanoid") then
+		track=Char.Humanoid.Animator:LoadAnimation(Anim)
+	end
 end)
 
 local function tryFindPlr(Needs)
