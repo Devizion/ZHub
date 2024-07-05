@@ -3,7 +3,7 @@ if _G.ZHub_Loaded then
 end
 
 --Params
-local vers="v2.1 BETA"
+local vers="v2.2 BETA"
 --Serives
 local Players=game:GetService("Players")
 local UserInputService=game:GetService("UserInputService")
