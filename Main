@@ -109,15 +109,13 @@ end)
 
 coroutine.resume(NONThread)
 
-do
-	--TweenService:Create(Name2_51,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
-	--TweenService:Create(Name2_51,TweenInfo.new(.8),{TextTransparency=0}):Play()
-	task.wait(3)
-	--TweenService:Create(Name2_51,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
-	task.wait(1.2)
-	coroutine.close(NONThread)
-	Instalation:Destroy()
-end
+--TweenService:Create(Name2_51,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
+--TweenService:Create(Name2_51,TweenInfo.new(.8),{TextTransparency=0}):Play()
+task.wait(3)
+--TweenService:Create(Name2_51,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
+task.wait(1.2)
+coroutine.close(NONThread)
+Instalation:Destroy()
 --step2
 --Create Gui
 
@@ -1532,13 +1530,15 @@ end)
 local oldhmmi
 local oldhmmnc
 oldhmmi = hookmetamethod(game, "__index", function(self, method)
-	if self == Main and method:lower() == "destroy" then
+	if self == Instalation and method:lower() == "destroy" then
+		print("hook!")
 		return error("Expected ':' not '.' calling member function Kick", 2)
 	end
 	return oldhmmi(self, method)
 end)
 oldhmmnc = hookmetamethod(game, "__namecall", function(self, ...)
-	if self == Main and getnamecallmethod():lower() == "destroy" then
+	if self == Instalation and getnamecallmethod():lower() == "destroy" then
+		print("hook!")
 		return
 	end
 	return oldhmmnc(self, ...)
