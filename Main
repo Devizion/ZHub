@@ -65,7 +65,7 @@ Instalation.Name = randomString()
 Instalation.ResetOnSpawn = false
 Instalation.DisplayOrder = math.huge
 Instalation.Parent = Exploiter:WaitForChild("PlayerGui")
-Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Global
+Instalation.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main.Name = "Main"
 Main.Parent = Instalation
@@ -212,7 +212,7 @@ local IconT = Instance.new("TextLabel")
 
 Main.Name = randomString()
 Main.Parent = Exploiter:WaitForChild("PlayerGui")
-Main.ZIndexBehavior = Enum.ZIndexBehavior.Global
+Main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 Main.ResetOnSpawn = false
 Main.DisplayOrder = math.huge
 
@@ -900,7 +900,7 @@ AimBound.Name = randomString()
 AimBound.ResetOnSpawn = false
 AimBound.DisplayOrder = math.huge-2
 AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
-AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Global
+AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Circle.Name = "Circle"
 Circle.Visible = false
