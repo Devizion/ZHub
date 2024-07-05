@@ -1124,12 +1124,6 @@ local Anim=Instance.new("Animation",Exploiter)
 Anim.AnimationId="rbxassetid://18343395912"
 local track
 
-Exploiter.CharacterAdded:Connect(function(Char)
-	if Char and Char:FindFirstChild("Humanoid") then
-		track=Char.Humanoid.Animator:LoadAnimation(Anim)
-	end
-end)
-
 local function tryFindPlr(Needs)
 	if not Needs or typeof(Needs)~="string" then return end
 	Needs=string.lower(Needs)
@@ -1440,6 +1434,12 @@ local Instructions={
 	["Done7"]=function()
 		Done7.Text="Вкл"
 		Done7.TextColor3=Color3.fromRGB(68, 211, 46)
+		
+		if Exploiter.Character and Exploiter.Character:FindFirstChild("Humanoid") then
+			track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
+		end
+		if not track then return end
+		
 		if AntiAim then
 			for i,v in getRoot(Exploiter.Character):GetChildren() do
 				if v:IsA("BodyAngularVelocity") then
