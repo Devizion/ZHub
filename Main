@@ -1465,14 +1465,13 @@ local Instructions={
 			end
 		end
 		
-		local conn
-		conn=Exploiter.CharacterAdded:Connect(function()
+		Exploiter.CharacterAdded:Connect(function()
 			print("new chr")
 			
 			if Exploiter.Character and Exploiter.Character:FindFirstChild("Humanoid") then
 				track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
 			end
-			if not track then conn:Disconnect() return end
+			if not track then return end
 			track:Play()
 			
 			local Anti=Instance.new("BodyAngularVelocity")
@@ -1486,7 +1485,6 @@ local Instructions={
 					v.Velocity=Vector3.new(0, 0, 0)
 				end
 			end
-			conn:Disconnect()
 		end)
 		
 		Done7.Text="Выкл"
