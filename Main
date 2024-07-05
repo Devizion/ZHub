@@ -16,6 +16,15 @@ workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
 	end
 end)
 local Mouse=Exploiter:GetMouse()
+
+function randomString()
+	local length = math.random(10,20)
+	local array = {}
+	for i = 1, length do
+		array[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(array)
+end
 --step1
 local CompleteAuto=false
 
@@ -51,7 +60,7 @@ local Main = Instance.new("Frame")
 local Name2 = Instance.new("TextLabel")
 local UIGradient = Instance.new("UIGradient")
 
-Instalation.Name = "Instalation"
+Instalation.Name = randomString()
 Instalation.ResetOnSpawn = false
 Instalation.DisplayOrder = math.huge
 Instalation.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -203,7 +212,7 @@ if not Main then
 	Done9 = Instance.new("TextButton")
 	local IconT = Instance.new("TextLabel")
 
-	Main.Name = "Main"
+	Main.Name = randomString()
 	Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	Main.ZIndexBehavior = Enum.ZIndexBehavior.Global
 	Main.ResetOnSpawn = false
@@ -889,7 +898,7 @@ if not Main then
 	Done7.TextColor3 = Color3.fromRGB(68, 211, 46)
 	Done7.TextSize = 14.000
 
-	AimBound.Name = "AimBound"
+	AimBound.Name = randomString()
 	AimBound.ResetOnSpawn = false
 	AimBound.DisplayOrder = math.huge-2
 	AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
@@ -913,7 +922,7 @@ if not Main then
 	UIStroke.Thickness = 1.5
 	UIStroke.Color = Color3.fromRGB(0, 255, 0)
 
-	Cursor.Name = "Cursor"
+	Cursor.Name = randomString()
 	Cursor.ResetOnSpawn = false
 	Cursor.DisplayOrder=math.huge-1
 	Cursor.Parent = Exploiter:WaitForChild("PlayerGui")
@@ -1164,7 +1173,7 @@ local function drawESP()
 				local Frame=Instance.new("Frame",Bild)
 				local UIs=Instance.new("UIStroke",Frame)
 
-				Bild.Name="ESP"
+				Bild.Name=randomString()
 				Bild.Size=UDim2.new(4,0,6,0)
 				Bild.Adornee=Model.PrimaryPart
 				Bild.AlwaysOnTop=true
@@ -1181,7 +1190,7 @@ local function drawESP()
 				local Frame2=Instance.new("Frame",Bild2)
 				local TextLabel=Instance.new("TextLabel",Frame2)
 
-				Bild2.Name="ESP2"
+				Bild2.Name=randomString()
 				Bild2.Size=UDim2.new(4,0,12,0)
 				Bild2.StudsOffset=Vector3.new(0,0,-1)
 				Bild2.Adornee=Model.PrimaryPart
@@ -1355,6 +1364,9 @@ local Instructions={
 					end
 					return
 				end)
+				
+				local conn2
+				conn2=tryFindPlr()
 			end)
 
 			Done4.Text="Выкл"
