@@ -1440,7 +1440,10 @@ local Instructions={
 	["Done7"]=function()
 		Done7.Text="Вкл"
 		Done7.TextColor3=Color3.fromRGB(68, 211, 46)
-		local track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
+		local track
+		if Exploiter.Character and Exploiter.Character.Humanoid then
+			track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
+		end
 		
 		if AntiAim then
 			for i,v in getRoot(Exploiter.Character):GetChildren() do
@@ -1457,7 +1460,7 @@ local Instructions={
 
 		local Anti=Instance.new("BodyAngularVelocity")
 		Anti.Parent=getRoot(Exploiter.Character)
-		Anti.AngularVelocity=Vector3.new(0,30,0)
+		Anti.AngularVelocity=Vector3.new(0,15,0)
 		Anti.MaxTorque=Vector3.new(0,math.huge,0)
 		Anti.P = math.huge
 		local Char=Exploiter.Character:GetChildren()
@@ -1466,6 +1469,24 @@ local Instructions={
 				v.Velocity=Vector3.new(0, 0, 0)
 			end
 		end
+		
+		local conn
+		conn=Exploiter.CharacterAdded:Connect(function()
+			track:Play()
+			
+			local Anti=Instance.new("BodyAngularVelocity")
+			Anti.Parent=getRoot(Exploiter.Character)
+			Anti.AngularVelocity=Vector3.new(0,15,0)
+			Anti.MaxTorque=Vector3.new(0,math.huge,0)
+			Anti.P = math.huge
+			local Char=Exploiter.Character:GetChildren()
+			for i, v in next, Char do
+				if v:IsA("BasePart") then
+					v.Velocity=Vector3.new(0, 0, 0)
+				end
+			end
+			conn:Disconnect()
+		end)
 		
 		Done7.Text="Выкл"
 		Done7.TextColor3=Color3.fromRGB(190, 18, 18)
