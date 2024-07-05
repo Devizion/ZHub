@@ -1103,6 +1103,7 @@ local ThreadESP=nil
 local Aimbot=false
 local TriggerBot_Aim=false
 local TriggerBot=false
+local ThreadAntiAim=nil
 local State=true
 local ESPstate=false
 local AntiAim=false
@@ -1465,6 +1466,30 @@ local Instructions={
 			end
 		end
 		
+		ThreadAntiAim=coroutine.create(function()
+			while task.wait(1) do
+				if AntiAim and not getRoot(Exploiter.Character):FindFirstChild("BodyAngularVelocity") then
+					if Exploiter.Character and Exploiter.Character:FindFirstChild("Humanoid") then
+						track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
+					end
+					if not track then continue end
+					track:Play()
+
+					local Anti=Instance.new("BodyAngularVelocity")
+					Anti.Parent=getRoot(Exploiter.Character)
+					Anti.AngularVelocity=Vector3.new(0,20,0)
+					Anti.MaxTorque=Vector3.new(0,math.huge,0)
+					Anti.P = math.huge
+					local Char=Exploiter.Character:GetChildren()
+					for i, v in next, Char do
+						if v:IsA("BasePart") then
+							v.Velocity=Vector3.new(0, 0, 0)
+						end
+					end
+				end
+			end
+		end)
+		
 		Done7.Text="Выкл"
 		Done7.TextColor3=Color3.fromRGB(190, 18, 18)
 	end,
@@ -1593,29 +1618,6 @@ FOV:GetPropertyChangedSignal("Text"):Connect(function()
 	if typeof(tonumber(FOV.Text))=="number" and FOV.Text~="" then
 		Circle.Size=UDim2.new(0,tonumber(FOV.Text)*2,0,tonumber(FOV.Text)*2)
 	end
-end)
-
-Exploiter.CharacterAdded:Connect(function()
-	print("new chr")
-
-	if Exploiter.Character and Exploiter.Character:FindFirstChild("Humanoid") then
-		track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
-	end
-	if not track then return end
-	track:Play()
-
-	local Anti=Instance.new("BodyAngularVelocity")
-	Anti.Parent=getRoot(Exploiter.Character)
-	Anti.AngularVelocity=Vector3.new(0,20,0)
-	Anti.MaxTorque=Vector3.new(0,math.huge,0)
-	Anti.P = math.huge
-	local Char=Exploiter.Character:GetChildren()
-	for i, v in next, Char do
-		if v:IsA("BasePart") then
-			v.Velocity=Vector3.new(0, 0, 0)
-		end
-	end
-	return
 end)
 
 _G.ZHub_Loaded=true
