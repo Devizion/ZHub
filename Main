@@ -1467,6 +1467,8 @@ local Instructions={
 		
 		local conn
 		conn=Exploiter.CharacterAdded:Connect(function()
+			print("new chr")
+			
 			if Exploiter.Character and Exploiter.Character:FindFirstChild("Humanoid") then
 				track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
 			end
