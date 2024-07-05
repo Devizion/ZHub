@@ -57,7 +57,7 @@ end
 --Create Gui
 local Instalation = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
-local Name2 = Instance.new("TextLabel")
+local Name2_51 = Instance.new("TextLabel")
 local UIGradient = Instance.new("UIGradient")
 
 Instalation.Name = randomString()
@@ -77,26 +77,26 @@ Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Size = UDim2.new(1, 0, 1, 0)
 Main.SizeConstraint = Enum.SizeConstraint.RelativeXX
 
-Name2.Name = "Name2"
-Name2.Parent = Main
-Name2.AnchorPoint = Vector2.new(0.5, 0.5)
-Name2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Name2.BackgroundTransparency = 1.000
-Name2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Name2.BorderSizePixel = 0
-Name2.Position = UDim2.new(0.5, 0, 1, 0)
-Name2.Size = UDim2.new(0.0500000007, 0, 0.0799999982, 0)
-Name2.Font = Enum.Font.Arial
-Name2.Text = "Z"
-Name2.TextColor3 = Color3.fromRGB(186, 130, 41)
-Name2.TextScaled = true
-Name2.TextSize = 100.000
-Name2.TextWrapped = true
+Name2_51.Name = "Name2"
+Name2_51.Parent = Main
+Name2_51.AnchorPoint = Vector2.new(0.5, 0.5)
+Name2_51.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name2_51.BackgroundTransparency = 1.000
+Name2_51.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Name2_51.BorderSizePixel = 0
+Name2_51.Position = UDim2.new(0.5, 0, 1, 0)
+Name2_51.Size = UDim2.new(0.0500000007, 0, 0.0799999982, 0)
+Name2_51.Font = Enum.Font.Arial
+Name2_51.Text = "Z"
+Name2_51.TextColor3 = Color3.fromRGB(186, 130, 41)
+Name2_51.TextScaled = true
+Name2_51.TextSize = 100.000
+Name2_51.TextWrapped = true
 
 UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(198, 152, 51)), ColorSequenceKeypoint.new(0.92, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
 UIGradient.Rotation = 180
 UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.55, 0.00), NumberSequenceKeypoint.new(1.00, 0.00)}
-UIGradient.Parent = Name2
+UIGradient.Parent = Name2_51
 
 local NONThread=coroutine.create(function()
 	while task.wait() do
@@ -110,10 +110,10 @@ end)
 coroutine.resume(NONThread)
 
 do
-	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
-	TweenService:Create(Name2,TweenInfo.new(.8),{TextTransparency=0}):Play()
+	TweenService:Create(Name2_51,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,0.5,0)}):Play()
+	TweenService:Create(Name2_51,TweenInfo.new(.8),{TextTransparency=0}):Play()
 	task.wait(3)
-	TweenService:Create(Name2,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
+	TweenService:Create(Name2_51,TweenInfo.new(1.5,Enum.EasingStyle.Exponential),{Position=UDim2.new(0.5,0,1,0)}):Play()
 	task.wait(1.2)
 	coroutine.close(NONThread)
 	Instalation:Destroy()
