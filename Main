@@ -1106,7 +1106,7 @@ local TriggerBot=false
 local ThreadAntiAim=nil
 local State=true
 local ESPstate=false
-local AntiAim=false
+local AntiAim_a=false
 
 local HealthLast
 local HealthNow
