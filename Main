@@ -1122,7 +1122,6 @@ hitSound.Volume=0.8
 
 local Anim=Instance.new("Animation",Exploiter)
 Anim.AnimationId="rbxassetid://18343395912"
-local track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
 
 Exploiter.CharacterAdded:Connect(function(Char)
 	track=Char.Humanoid.Animator:LoadAnimation(Anim)
@@ -1153,7 +1152,9 @@ local function checkRig()
 end
 
 local function getRoot(Char)
-	return Char.PrimaryPart or Char:FindFirstChild("Torso") or Char:FindFirstChild("UpperTorso")
+	if Char then
+		return Char.PrimaryPart or Char:FindFirstChild("Torso") or Char:FindFirstChild("UpperTorso")
+	end
 end
 
 local function tpPos(X,Y,Z)
@@ -1436,6 +1437,7 @@ local Instructions={
 	["Done7"]=function()
 		Done7.Text="Вкл"
 		Done7.TextColor3=Color3.fromRGB(68, 211, 46)
+		local track=Exploiter.Character.Humanoid.Animator:LoadAnimation(Anim)
 		
 		if AntiAim then
 			for i,v in getRoot(Exploiter.Character):GetChildren() do
