@@ -32,6 +32,7 @@ function randomString()
 	return table.concat(array)
 end
 --step1
+local TimeUntill
 local CompleteAuto=false
 do
 	local path="https://zhub-788fb-default-rtdb.europe-west1.firebasedatabase.app/Accounts"
@@ -47,6 +48,7 @@ do
 
 	for _,v in SearchTable do
 		if typeof(v)=="table" and v["UID"]==Exploiter.UserId then
+			TimeUntill=v["Time"]+v["Time_Of_Buy"]
 			CompleteAuto=true
 		end
 	end
@@ -1710,6 +1712,9 @@ local RegButton=Enum.KeyCode.X
 
 local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 local tab={}
+
+local format=os.date("%d.%m",TimeUntill)
+Time.Text=format
 
 local ExploitFolder=Instance.new("Folder",Exploiter)
 ExploitFolder.Name=randomString()
