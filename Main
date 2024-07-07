@@ -1569,6 +1569,7 @@ UIStroke_4.LineJoinMode = Enum.LineJoinMode.Round
 UIStroke_4.Thickness = 1.25
 
 Modal.BackgroundTransparency=1
+Modal.Parent=MainZHUB
 Modal.Text=""
 
 Cursor.Name = "Cursor"
