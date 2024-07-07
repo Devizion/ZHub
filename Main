@@ -1572,7 +1572,7 @@ Modal.BackgroundTransparency=1
 Modal.Text=""
 
 Cursor.Name = "Cursor"
-Cursor.Parent = Exploiter:WaitForChild("PlayerGui")
+Cursor.Parent = PARENT
 Cursor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main2.Name = "Main2"
@@ -1593,7 +1593,7 @@ CursorM.BorderSizePixel = 0
 CursorM.Size = UDim2.new(0.400000006, 0, 0.400000006, 0)
 
 AimBound.Name = "AimBound"
-AimBound.Parent = Exploiter:WaitForChild("PlayerGui")
+AimBound.Parent = PARENT
 AimBound.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Circle.Name = "Circle"
