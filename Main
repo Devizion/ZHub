@@ -1714,7 +1714,7 @@ local RegButton=Enum.KeyCode.X
 local Cursor=Exploiter:WaitForChild("PlayerGui"):FindFirstChild("Cursor")
 local tab={}
 
-local format=os.date("%d.%m",TimeUntill)
+local format=os.date("%d.%m.%y",TimeUntill)
 Time.Text=format
 
 local ExploitFolder=Instance.new("Folder",Exploiter)
